@@ -15,7 +15,12 @@ im.list()
 
 b2 = im.import("sentinel.dolomites.b2.tif")
 
+colorRampPalette(c("lightsalmon", "magenta", "mediumpurple1")(100)
 
+                 
+#par per multiframe
+par(mfrow
+                 
 
 
 
