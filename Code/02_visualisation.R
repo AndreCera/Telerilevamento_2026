@@ -61,6 +61,34 @@ names(sentinel)
 # se voglio solo una banda
 plot(sentinel$sentinel.dolomites.b8)
                  
+library(devtools)
+library(terra)
+library(imageRy)
+library(viridis)
+library(ggplot2)
+install.packages("patchwork")
+library(patchwork)
+p1=im.ggplot(b8)
+p2=im.ggplot(b4)
+p1+p2
+#multiframe
+#1) par(mfrow=c(1,2))
+#2) im.multiframe(1,2)
+#3) 
+
+#plotting RGB
+                 
+#sentinel=c(b2,b3,b4,b8)voglio plottare solo le bande del visibile
+im.plotRGB(sentinel, r=3, g=2, b=1)    #l'occhio umano vedrebbe questo da quella quota
+#falso colore
+im.plotRGB(sentinel, r=4, g=3, b=2)  #con il rosso al NIR
+im.plotRGB(sentdol, r=3, g=4, b=2)   #con il verde al NIR
+                 
+pairs(sentinel)		#correlation plot
+
+plotRGB(sentinel,4,2,3,stretch="lin")   # mantiene lo schema iniziale (amplia il valore linearmente)
+plotRGB(sentinel,4,2,3,stretch="hist")  #è solo un mezzo per aumentare il contrasto  (perché cambia il valore)
+                 
 
                  
 
