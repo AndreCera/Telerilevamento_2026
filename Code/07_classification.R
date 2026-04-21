@@ -29,20 +29,42 @@ png("chess_class.png")
 plot(chess_class)
 dev.off()
 
-png("kayak.png")
+#sfruttiamo la classificazion eper fare una pmappa di confronto di uso del suolo del matogrosso
+im.list() 
+im.multiframe(2,1)
+m1992 = im.import("matogrosso_l5_1992219_lrg.jpg")
+m2006 = im.import("matogrosso_ast_2006209_lrg.jpg")
 
+m1992_class = im.classify(m1992, seed=42, num_clusters = 2)
+m2006_class = im.classify(m2006, seed=42, num_clusters = 2
+# Assign labels -> diciamo cosa è cosa 
+levels(m1992_class) <- data.frame(
+  value = c(1, 2),
+  label = c("forest", "human")
+)
+levels(m2006_class) <- data.frame(
+  value = c(2, 1),
+  label = c("forest", "human")
+)
+setwd("C:\\Users\\User\\Desktop\\telerilevamento in R")
 
+#calculating frequencies 
+f1992 = freq(m1992_class)
+f2006 = freq(m2006_class)    # risultato in pixel
+#voglio il risultato in frequenza relativa
+                          
+f1992$count                          
+f2006$count
 
+fperc_1992 = f1992$count/ncell(m1992_class)*100
+fperc_2006 = f2006$count/ncell(m2006_class)*100
+# fperc_1992
+# 83.08683 16.91317
+# fperc_2006
+# 54.69439 45.30561
 
-
-
-
-
-
-
-
-
-
+#Table
+tabout = data.frame(class = c("Forest","Human"), perc1992 = c(83.1, 16.9), perc2006 = (54.7 , 45.3))
 
 
 
