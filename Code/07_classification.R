@@ -63,11 +63,27 @@ fperc_2006 = f2006$count/ncell(m2006_class)*100
 # fperc_2006
 # 54.69439 45.30561
 
+
+                    
 #Table
-tabout = data.frame(class = c("Forest","Human"), perc1992 = c(83.1, 16.9), perc2006 = (54.7 , 45.3))
+tabout <- data.frame(class = c("Forest","Human"), perc1992 = c(83, 17), perc2006 = (45,55))
 
+# Using the ggplot2 package for the final graph
+p1 <- ggplot(tabout, aes(x=class, y=perc1992, color=class)) + #per la struttura
+      geom_bar(stat="identity", fill="white") + #per dire che voglio un barrplot/istogramma e la colorazione interna 
+      ylim(c(0,100)) + #limits
+      theme(legend.position="none")       #non avere la legenda    
+               
+p2 <- ggplot(tabout, aes(x=class, y=perc2006, color=class)) + #per la struttura
+      geom_bar(stat="identity", fill="white")+ #per dire che voglio un barrplot/istogramma e la colorazione interna          
+      ylim(c(0,100)) + #limits
+      theme(legend.position="none") 
+                     
+p1 + p2   #funzione del pacchetto patchwork per aggiungere e fondere 2 grafici
 
+													
 
+                          
 
 
 
