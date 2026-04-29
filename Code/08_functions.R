@@ -46,7 +46,9 @@ plot(seq(-5,5,0.1), dnorm(seq(-5,5,0.1), 0,1), type = "l")
    lines(seq(-5,5,0.1), dt(seq(-5,5,0.1), df=gdl), lty=2)
  }
 
-
+sink(data.txt")
+loop2()
+sink()
 
 
 
