@@ -312,13 +312,9 @@ plot(str_ago_19[["B4"]], col = inferno(100), main = "Post - Rosso (B4)")
 plot(str_ago_19[["B8"]], col = inferno(100), main = "Post - NIR (B8)")
 dev.off()
 
-# ====================================================================
-# 4. CALCOLO DEGLI INDICI VEGETAZIONALI, DIFFERENZE E ESPORTAZIONE
-# ====================================================================
+# CALCOLO DEGLI INDICI VEGETAZIONALI, DIFFERENZE E ESPORTAZIONE
 
-# --------------------------------------------------------------------
-# A. INDICE DVI (Difference Vegetation Index)
-# --------------------------------------------------------------------
+# INDICE DVI (Difference Vegetation Index)
 
 # Calcolo indici
 dvi_giu_19 <- str_giu_19[["B8"]] - str_giu_19[["B4"]]
@@ -353,13 +349,10 @@ png("immagini progetto stromboli/dvi_bilancio_annuale.png", width = 14, height =
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(dvi_giu_19, col = cividis(100), main = "DVI Giugno 2019 (Pre)")
 plot(dvi_giu_20, col = cividis(100), main = "DVI Giugno 2020 (Recupero)")
-plot(ddvi_netto, col = turbo(100), main = "Delta DVI Netto (Annuallo)")
+plot(ddvi_netto, col = turbo(100), main = "Delta DVI Netto (Annuale)")
 dev.off()
 
-
-# --------------------------------------------------------------------
-# B. INDICE NDVI (Normalized Difference Vegetation Index)
-# --------------------------------------------------------------------
+# INDICE NDVI (Normalized Difference Vegetation Index)
 
 # Calcolo indici
 ndvi_giu_19 <- (str_giu_19[["B8"]] - str_giu_19[["B4"]]) / (str_giu_19[["B8"]] + str_giu_19[["B4"]])
@@ -386,7 +379,7 @@ png("immagini progetto stromboli/ndvi_recupero_2020.png", width = 14, height = 5
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_ago_19, col = mako(100), main = "NDVI Agosto 2019 (Post)")
 plot(ndvi_giu_20, col = mako(100), main = "NDVI Giugno 2020 (Recupero)")
-plot(dndvi_20, col = turbo(100), main = "Delta NDVI (Recupero 19-20)")
+plot(dndvi_20, col = inferno(100), main = "Delta NDVI (Recupero 19-20)")
 dev.off()
 
 # Grafico 3: Bilancio Netto Annuale NDVI (Giugno vs Giugno)
@@ -397,10 +390,7 @@ plot(ndvi_giu_20, col = mako(100), main = "NDVI Giugno 2020 (Recupero)")
 plot(dndvi_netto, col = turbo(100), main = "Delta NDVI Netto (Annuale)")
 dev.off()
 
-
-# --------------------------------------------------------------------
-# C. INDICE NBR (Normalized Burn Ratio)
-# --------------------------------------------------------------------
+# INDICE NBR (Normalized Burn Ratio)
 
 # Calcolo indici
 nbr_giu_19 <- (str_giu_19[["B8"]] - str_giu_19[["B12"]]) / (str_giu_19[["B8"]] + str_giu_19[["B12"]])
@@ -408,8 +398,8 @@ nbr_ago_19 <- (str_ago_19[["B8"]] - str_ago_19[["B12"]]) / (str_ago_19[["B8"]] +
 nbr_giu_20 <- (str_giu_20[["B8"]] - str_giu_20[["B12"]]) / (str_giu_20[["B8"]] + str_giu_20[["B12"]])
 
 # Calcolo differenze
-dnbr_19    <- nbr_giu_19 - nbr_ago_19  # Severità del danno immediata[cite: 1]
-dnbr_20    <- nbr_ago_19 - nbr_giu_20  # Attenuazione del danno[cite: 1]
+dnbr_19    <- nbr_giu_19 - nbr_ago_19  # Severità del danno immediata
+dnbr_20    <- nbr_ago_19 - nbr_giu_20  # Attenuazione del danno
 dnbr_netto <- nbr_giu_19 - nbr_giu_20  # Severità del danno permanente a un anno
 
 # VISUALIZZAZIONE E ESPORTAZIONE NBR
@@ -422,7 +412,7 @@ plot(nbr_ago_19, col = rocket(100), main = "NBR Agosto 2019 (Post)")
 plot(dnbr_19, col = turbo(100), main = "Delta NBR (dNBR 2019)")
 dev.off()
 
-# Grafico 2: Recupero NBR (2019 vs 2020)
+# Grafico 2: Recupero NBR (Agosto 2019 vs Giugno 2020)
 png("immagini progetto stromboli/nbr_recupero_2020.png", width = 14, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_ago_19, col = rocket(100), main = "NBR Agosto 2019 (Post)")
@@ -430,7 +420,7 @@ plot(nbr_giu_20, col = rocket(100), main = "NBR Giugno 2020 (Recupero)")
 plot(dnbr_20, col = turbo(100), main = "Delta NBR (dNBR 19-20)")
 dev.off()
 
-# Grafico 3: Bilancio Netto Annuale NBR (Giugno vs Giugno)
+# Grafico 3: Bilancio Netto Annuale NBR (Giugno 19 vs Giugno 20)
 png("immagini progetto stromboli/nbr_bilancio_annuale.png", width = 14, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_giu_19, col = rocket(100), main = "NBR Giugno 2019 (Pre)")
