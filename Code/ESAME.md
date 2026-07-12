@@ -1,3 +1,4 @@
+
 # Monitoraggio Multitemporale e Analisi Spaziale degli Effetti del Parossismo del 2019 all'Isola di Stromboli tramite Dati Sentinel-2
 
 ## Introduzione e Obiettivi del Progetto
@@ -98,7 +99,9 @@ plotRGB(str_giu_19, r=3, g=2, b=1, stretch="lin", main="Giugno 2019 (Pre)")
 plotRGB(str_ago_19, r=3, g=2, b=1, stretch="lin", main="Agosto 2019 (Post)")
 plotRGB(str_giu_20, r=3, g=2, b=1, stretch="lin", main="Giugno 2020 (Recupero)")
 ```
-![](immagini%20progetto%20stromboli/true_color_confronto.png)
+
+<img width="480" height="480" alt="true_color_confronto" src="https://github.com/user-attachments/assets/a84a3075-6c45-4894-988f-442b162d60ab" />
+
 
 ```r
 # Visualizzazione in falsi colori (Near InfraRed sul canale del Rosso - RGB 4,3,2)
