@@ -379,7 +379,7 @@ png("immagini progetto stromboli/ndvi_recupero_2020.png", width = 14, height = 5
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_ago_19, col = mako(100), main = "NDVI Agosto 2019 (Post)")
 plot(ndvi_giu_20, col = mako(100), main = "NDVI Giugno 2020 (Recupero)")
-plot(dndvi_20, col = inferno(100), main = "Delta NDVI (Recupero 19-20)")
+plot(dndvi_20, col = turbo(100), main = "Delta NDVI (Recupero 19-20)")
 dev.off()
 
 # Grafico 3: Bilancio Netto Annuale NDVI (Giugno vs Giugno)
