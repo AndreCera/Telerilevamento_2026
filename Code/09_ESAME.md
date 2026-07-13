@@ -1,4 +1,7 @@
-# MONITORAGGIO TEMPORALE DEGLI EFFETTI DELLE ERUZIONI VULCANICHE SULLA VEGETAZIONE - IL CASO STUDIO DELL'ISOLA DI STROMBOLI
+# 🛰️🌍📡 TELERILEVAMENTO ED ERUZIONI VULCANICHE 🌋🌋🌋
+<div align="center">
+
+ ## 🇮🇲 IL CASO STUDIO DELL'ISOLA DI STROMBOLI 🍋
 
 ## 1. Introduzione
 
@@ -201,7 +204,7 @@ dev.off()
 
 L'assorbimento della banda rossa ritorna alle condizioni pre-parossismo ma il NIR ancora non pareggia i livelli di riflettanza dell'anno precedente
 
-### 5.4 Composizioni RGB: vero colore e falso colore
+### 5.4 Plot RGB: vero colore e falso colore
 
 ```r
 # VISUALIZZAZIONE IN COLORI REALI (True Color - RGB 3,2,1)
@@ -212,7 +215,7 @@ plotRGB(str_giu_20, r=3, g=2, b=1, stretch="lin", main="Giugno 2020 (Recupero)")
 dev.off()
 ```
 
-<img width="480" height="174" alt="true_color_confronto" src="https://github.com/user-attachments/assets/ce475319-2ea7-4d73-a7d6-66bd93cf9b7b" />
+<img width="1000" alt="true_color_confronto" src="https://github.com/user-attachments/assets/ce475319-2ea7-4d73-a7d6-66bd93cf9b7b" />
 
 Gli effetti dell'eruzione del 2019 sono apprezzabili anche dall'occhio umano: la perdita delle aree verdi, principalmente macchia mediterranea, è lampante nel settore occidentale dell'isola, mentre il recupero è solo parziale a giugno 2020
 
@@ -224,7 +227,7 @@ plotRGB(str_ago_19, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Agosto 20
 plotRGB(str_giu_20, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Giugno 2020")
 dev.off() # Chiudere il pannello di Visualizzazione delle immagini e ristabilire il formato dei grafici a quello di default
 ```
-<img width="480" height="173" alt="false_color_confronto" src="https://github.com/user-attachments/assets/7474e769-051f-4120-b74c-8a118a54a738" />
+<img width="1000" alt="false_color_confronto" src="https://github.com/user-attachments/assets/7474e769-051f-4120-b74c-8a118a54a738" />
 
 Nel falso colore (NIR-Rosso-Verde) la vegetazione sana appare tipicamente in tonalità rosse/rosate: una riduzione di queste tonalità tra giugno e agosto 2019 è il segnale atteso dell'impatto degli incendi.
 
@@ -605,4 +608,6 @@ Come indicato in apertura, un possibile sviluppo naturale di questo lavoro è l'
 
 ## Riferimenti bibliografici
 
-Iacono, F., Bisson, M., Spinetti, C., et al. (2025). Wildfires Induced by Volcanic Activity at Stromboli Island during the 2019 Summer through Satellite and Drone Data. *Remote Sensing in Earth Systems Sciences*, 8(2), 733–752. https://doi.org/10.1007/s41976-025-00215-6
+Carapezza, M. L., Ricci, T., Ranaldi, M., & Tarchini, L. (2009). Active degassing structures of Stromboli and variations in diffuse CO₂ output related to the volcanic activity. *Journal of Volcanology and Geothermal Research, 182*(3–4), 231–245. https://doi.org/10.1016/j.jvolgeores.2008.08.006
+
+Iacono, F., Bisson, M., Spinetti, C., et al. (2025). Wildfires Induced by Volcanic Activity at Stromboli Island during the 2019 Summer through Satellite and Drone Data. *Remote Sensing in Earth Systems Sciences, 8*(2), 733–752. https://doi.org/10.1007/s41976-025-00215-6
