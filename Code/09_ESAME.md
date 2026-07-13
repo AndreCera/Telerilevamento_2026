@@ -2,51 +2,69 @@
 
 ## 1. Introduzione
 
-Il telerilevamento satellitare multitemporale rappresenta oggi uno degli strumenti più efficaci per monitorare gli effetti di eventi vulcanici sul paesaggio, in particolare sulla copertura vegetale delle aree colpite. La possibilità di acquisire immagini a intervalli regolari e su vaste aree consente di quantificare in modo oggettivo l'impatto immediato di un evento distruttivo e di seguirne nel tempo l'eventuale recupero, superando i limiti dei rilievi a terra, spesso più costosi, localizzati e difficili da ripetere con la stessa frequenza.
+Il telerilevamento satellitare è una disciplina che permette l’osservazione di aree molto estese o difficilmente accessibili della superficie terrestre, 
+caratterizzate da diverse risoluzioni spaziali e in tempi relativamente brevi. Negli ultimi 30 anni, i progressi tecnologici hanno consentito l’applicazione di
+questa disciplina allo studio delle calamità naturali e, in particolare, alla riduzione dell’esposizione della popolazione ai rischi legati agli incendi
+(Iacono et al., 2025).
 
-Il presente lavoro si inserisce in questo ambito e ha per oggetto l'isola di Stromboli (Isole Eolie), colpita il 3 luglio 2019 da un violento parossismo che ha innescato numerosi incendi sui fianchi del vulcano. L'obiettivo dello studio è quantificare, attraverso indici spettrali derivati da immagini Sentinel-2, l'impatto immediato dell'evento sulla vegetazione dell'isola e valutarne il recupero nel medio termine, confrontando tre acquisizioni: giugno 2019 (condizione pre-parossismo), agosto 2019 (condizione immediatamente successiva agli incendi) e giugno 2020 (a un anno di distanza, come verifica del recupero). A tal fine sono stati calcolati e confrontati gli indici DVI, NDVI e NBR, ed è stata condotta una classificazione della copertura del suolo per stimare le variazioni percentuali di superficie vegetata.
+Il presente lavoro si inserisce in questo ambito e ha per oggetto l'isola di Stromboli (Isole Eolie), colpita il 3 luglio 2019 da un violento parossismo che ha
+innescato numerosi incendi sui fianchi del vulcano. L'obiettivo di questo progetto è quantificare, attraverso indici spettrali derivati da immagini Sentinel-2, 
+l'impatto immediato dell'evento sulla vegetazione dell'isola e valutarne il recupero nel medio termine, confrontando tre acquisizioni: giugno 2019 (condizione
+pre-parossismo), agosto 2019 (condizione immediatamente successiva agli incendi) e giugno 2020 (a un anno di distanza, come verifica del recupero). A tal fine 
+sono stati calcolati e confrontati gli indici DVI, NDVI e NBR, ed è stata condotta una classificazione della copertura del suolo per stimare le variazioni 
+percentuali di superficie vegetata.
 
-In prospettiva, si intende ampliare l'analisi temporale anche all'anno successivo (2021), per verificare se il recupero della vegetazione osservato nel breve periodo (giugno 2020) prosegua, si stabilizzi o subisca eventuali battute d'arresto nel medio termine — un'estensione che permetterebbe di descrivere in modo più completo la traiettoria di recupero post-evento.
+## 2. Inquadramento geologico e il caso studio del 2019
 
-## 2. Area di studio e il parossismo del 2019
+Stromboli è l'isola vulcanica più settentrionale dell'arcipelago delle Eolie, in Sicilia, e rappresenta la porzione emersa di un edificio vulcanico che si
+estende fino a 1500-2600 m sotto il livello del mare; la sua cima, il Vancori, raggiunge i 924 m s.l.m., mentre l'attività eruttiva si concentra nella terrazza
+craterica, situata nella parte sommitale della Sciara del Fuoco (Carapezza et al., 2009).
 
-Stromboli è l'isola vulcanica più settentrionale dell'arcipelago delle Eolie, in Sicilia, e rappresenta la porzione emersa di un edificio vulcanico che si estende fino a 1500-2600 m sotto il livello del mare; la sua cima, il Vancori, raggiunge i 924 m s.l.m., mentre l'attività eruttiva si concentra nella terrazza craterica, situata nella parte sommitale della Sciara del Fuoco (Iacono et al., 2025).
+<img width="711" height="632" alt="mappa_geologica_stromboli" src="https://github.com/user-attachments/assets/6ba55bc4-19f1-46ca-bfce-0d75f9fde615" />
 
-**[INSERISCI QUI: mappa geologica dell'isola di Stromboli — ricorda di citarne la fonte in didascalia]**
+Fig. 1. Carta strutturale schematica di Stromboli (Carapezza et al., 2009) 
 
-L'attività ordinaria del vulcano, detta "stromboliana", consiste in esplosioni brevi, ricorrenti e di modesta energia; essa può occasionalmente essere interrotta da colate laviche, esplosioni maggiori e parossismi, questi ultimi rappresentando le manifestazioni più pericolose dell'attività vulcanica dell'isola. I parossismi generano colonne eruttive alte diversi chilometri e possono produrre correnti piroclastiche che, raggiungendo il mare, sono in grado di innescare piccoli maremoti; il materiale incandescente e i lapilli, ricadendo sulla vegetazione, danno spesso origine a incendi che si propagano lungo i fianchi dell'isola, talvolta fino agli abitati di Stromboli e Ginostra. Questo fenomeno è documentato più volte nella storia recente dell'isola (tra gli altri eventi, nel 1930, 1943 e 1950) e si è ripetuto nell'estate 2019 (Iacono et al., 2025).
+L'attività ordinaria del vulcano, detta "stromboliana", consiste in esplosioni brevi, ricorrenti e di modesta energia; essa può occasionalmente essere 
+interrotta da colate laviche, esplosioni maggiori e parossismi, questi ultimi rappresentando le manifestazioni più pericolose dell'attività vulcanica 
+dell'isola. Associate alle colonne eruttive sono associate piogge di clasti balistici (blocchi e bombe) che, possono appicare incendi che si propagano
+nella macchia mediterranea dell'isola.
+Questo fenomeno è documentato più volte nella storia recente dell'isola (1930, 1943 e 1950) e si è ripetuto nell'estate 2019 (Iacono et al., 2025).
 
-Il parossismo del 3 luglio 2019 è iniziato nel primo pomeriggio con un'esplosione improvvisa che ha causato la ricaduta di proiettili balistici incandescenti fino a quote di circa 500 m s.l.m. sul fianco nord, sopra l'abitato di Stromboli, e sotto i 200 m s.l.m. in direzione di Ginostra; è seguita una colonna eruttiva alta 6-8 km, mentre due colate piroclastiche sono scese lungo la Sciara del Fuoco innescando piccoli maremoti al loro ingresso in mare. Gli incendi provocati dal materiale incandescente hanno interessato soprattutto il settore meridionale dell'isola, propagandosi fino a Ginostra — dove hanno distrutto la centrale elettrica — e causando la morte di una persona lungo un sentiero escursionistico, per l'esposizione al fumo e al calore. Un secondo parossismo, il 28 agosto 2019, ha generato un'ulteriore colata piroclastica lungo la Sciara del Fuoco e nuovi incendi, di estensione più limitata, sul fianco nord-orientale dell'isola (Iacono et al., 2025).
-
-Sono proprio gli effetti di questi incendi sulla vegetazione — e il loro successivo, parziale recupero — a essere oggetto dell'analisi che segue.
+Il parossismo del 3 luglio 2019 è iniziato nel primo pomeriggio con un'esplosione improvvisa che ha causato la ricaduta di scorie incandescenti fino al'abitato
+di Stromboli e in direzione Ginostra. È seguita una colonna eruttiva alta 6-8 km, mentre due colate piroclastiche sono scese lungo la Sciara del Fuoco 
+innescando piccoli maremoti al loro ingresso in mare. 
+Gli incendi provocati dal materiale incandescente hanno interessato soprattutto il settore meridionale dell'isola, propagandosi fino a Ginostra dove hanno 
+distrutto la centrale elettrica e causato la morte di una persona.
 
 ## 3.1 Metodi
 
-Le immagini satellitari Sentinel-2 impiegate in questo lavoro sono state reperite manualmente attraverso il Copernicus Browser dell'ESA, piuttosto che tramite Google Earth Engine (GEE). Questa scelta è stata motivata da due esigenze: da un lato, le indagini richiedevano acquisizioni puntuali e circoscritte a finestre temporali molto ristrette (pre-parossismo, immediatamente post-parossismo, a un anno di distanza), per cui un prodotto mediato su più immagini, come tipicamente restituito da GEE, avrebbe potuto diluire o mascherare il segnale d'interesse; dall'altro, trattandosi di un vulcano attivo, le condizioni di copertura nuvolosa nelle fasi successive a un'eruzione sono spesso sfavorevoli, ed era quindi necessario poter scegliere manualmente, scena per scena, le immagini con la minore copertura nuvolosa sull'area di interesse e la maggiore flessibilità nella selezione delle bande da scaricare.
+Le immagini satellitari Sentinel-2 impiegate in questo lavoro sono state reperite manualmente attraverso il Copernicus Browser dell'ESA.
+Questa scelta è stata motivata da due esigenze: da un lato, le indagini richiedevano acquisizioni puntuali e circoscritte a finestre temporali molto ristrette
+(pre-parossismo, immediatamente post-parossismo, a un anno di distanza), per cui un prodotto mediato su più immagini, come tipicamente restituito da GEE, 
+avrebbe potuto diluire o mascherare il segnale d'interesse; dall'altro, trattandosi di un vulcano attivo, le condizioni di copertura nuvolosa nelle fasi 
+successive a un'eruzione sono spesso sfavorevoli, ed era quindi necessario poter scegliere manualmente le immagini con la minore copertura 
+nuvolosa sull'area di interesse e avere maggiore flessibilità nella selezione delle bande da scaricare per poter testare numerosi indici spettrale.
 
 L'elaborazione dei dati è stata condotta interamente in ambiente R, utilizzando funzioni di R base insieme ai seguenti pacchetti:
 
 ```r
-# Ho scaricato immagini Sentinel_2 di Stromboli dal browser open source dell'ESA Copernicus
-# Ho preferito scaricare le immagini da Copernicus invece che da GEE per avere maggiore controllo e scelta sull'immagine 
-# da scaricare: trattandosi di un vulcano, le condizioni di visibilità e copertura nuvolosa, spesso nelle fases successive a un'eruzione
-# sono spesso inadatte a svolgere un analisi temporale
-
-# Devo ritagliare le immagini e creare uno stack manualmente
-
-library(terra)      # Per lavorare con raster e immagini satellitari
-library(imageRy)    # Funzioni di visualizzazione rapide
-library(viridis)    # Palette di colori
-library(ggplot2)    # Pacchetto per la creazione di grafici
-library(reshape2)   # Riorganizzazioni dei dati tabellari
+library(terra)      # Pacchetto principale per lavorare con raster e immagini satellitari
+library(viridis)    # 8 color scales adatte anche a utenti con daltonismo
+library(ggplot2)    # Per la creazione di grafici
+library(reshape2)   # Riorganizzare i dati nei dataframes
 ```
 
-Gli indici spettrali calcolati e confrontati sulle tre date sono i seguenti:
+Gli indici spettrali calcolati e confrontati sono i seguenti:
 
-- **DVI (Difference Vegetation Index)** — differenza semplice tra riflettanza nel NIR e nel Rosso (B8 − B4); fornisce un'indicazione grezza, non normalizzata, del vigore vegetativo.
-- **NDVI (Normalized Difference Vegetation Index)** — versione normalizzata del DVI, (B8 − B4)/(B8 + B4); è l'indice standard per la stima della salute e densità della vegetazione, con valori teorici compresi tra -1 e 1.
-- **NBR (Normalized Burn Ratio)** — (B8 − B12)/(B8 + B12), basato sul contrasto tra NIR e SWIR; è particolarmente sensibile alle superfici bruciate e alla cenere, che assorbono meno nel SWIR rispetto alla vegetazione sana.
-- **NDWI (Normalized Difference Water Index)** — (B3 − B8)/(B3 + B8); in questo lavoro è stato utilizzato non per una vera e propria caratterizzazione idrologica, ma con la funzione operativa di isolare i pixel di mare, così da poterli escludere (o gestire come classe a sé) nella successiva classificazione ternaria della copertura del suolo.
+- **DVI (Difference Vegetation Index)** — differenza semplice tra riflettanza nel NIR e nel Rosso (B8 − B4); fornisce un'indicazione grezza, non normalizzata,
+  del vigore vegetativo.
+- **NDVI (Normalized Difference Vegetation Index)** — versione normalizzata del DVI, (B8 − B4)/(B8 + B4); è l'indice standard per la stima della salute e
+  densità della vegetazione, con valori teorici compresi tra -1 e 1.
+- **NBR (Normalized Burn Ratio)** — (B8 − B12)/(B8 + B12), basato sul contrasto tra NIR e SWIR; è particolarmente sensibile alle superfici bruciate e alla
+  cenere, che assorbono meno nel SWIR rispetto alla vegetazione sana.
+- **NDWI (Normalized Difference Water Index)** — (B3 − B8)/(B3 + B8); in questo lavoro è stato utilizzato non per una vera e propria caratterizzazione
+  idrologica, ma con la funzione operativa di isolare i pixel di mare, così da poterli escludere (o gestire come classe a sé) nella successiva classificazione
+  ternaria dell'isola.
 
 ## 4. Preparazione del materiale
 
