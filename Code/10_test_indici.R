@@ -102,3 +102,21 @@ plot(vi6t_giu20, col = mako(100), main = "VI6T Giugno 2020 (Recupero)")
 # Plot Differenziale Delta VI6T Index
 par(mfrow = c(1, 1), mar = c(4, 4, 4, 5))
 plot(dvi6t_19, col = turbo(100), main = "Delta VI6T Index - Severità Termo-Ottica")
+
+
+
+
+
+# ASSESSMENT GEOLOGICO E PETROGRAFICO: RAPPORTI TRA BANDE (BAND RATIOS)
+
+# 2. PLOT MINERALI FERROSI 
+ferrous_giu_19 <- str_giu_19[["B12"]] / str_giu_19[["B8"]]
+ferrous_ago_19 <- str_ago_19[["B12"]] / str_ago_19[["B8"]]
+
+limiti_ferrous <- quantiles(c(ferrous_giu_19, ferrous_ago_19), probs = c(0.005, 0.995))
+
+png("immagini progetto stromboli/geologia_ferrous_minerals_confronto.png", width = 10, height = 5, units = "in", res = 300)
+par(mfrow = c(1, 2), mar = c(4, 3, 4, 5))
+plot(ferrous_giu_19, col = mako(100), range = limiti_ferrous, main = "Minerali Ferrosi - Giugno 2019 (Pre)")
+plot(ferrous_ago_19, col = mako(100), range = limiti_ferrous, main = "Minerali Ferrosi - Agosto 2019 (Post)")
+dev.off()
