@@ -2,6 +2,8 @@
 <div align="center">
 
  ## 🇮🇲 IL CASO STUDIO DELL'ISOLA DI STROMBOLI 🍋
+
+## Andrea Cerasoli - CDL in Geologia per lo Sviluppo Sostenibile (GEOSS)
 </div>
 
 ## 1. Introduzione
