@@ -28,7 +28,8 @@ craterica, situata nella parte sommitale della Sciara del Fuoco (Carapezza et al
 
 <img width="711" height="632" alt="mappa_geologica_stromboli" src="https://github.com/user-attachments/assets/6ba55bc4-19f1-46ca-bfce-0d75f9fde615" />
 
-Fig. 1. Carta strutturale schematica di Stromboli (Carapezza et al., 2009) 
+
+*Fig. 1. Carta strutturale schematica di Stromboli (Carapezza et al., 2009).*
 
 L'attività ordinaria del vulcano, detta "stromboliana", consiste in esplosioni brevi, ricorrenti e di modesta energia; essa può occasionalmente essere 
 interrotta da colate laviche, esplosioni maggiori e parossismi, questi ultimi rappresentando le manifestazioni più pericolose dell'attività vulcanica 
