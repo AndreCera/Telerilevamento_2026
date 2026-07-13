@@ -35,9 +35,9 @@ craterica, situata nella parte sommitale della Sciara del Fuoco (Carapezza et al
 *Fig. 1. Carta strutturale schematica di Stromboli (Carapezza et al., 2009).*
 
 L'attività ordinaria del vulcano, detta "stromboliana", consiste in esplosioni brevi, ricorrenti e di modesta energia; essa può occasionalmente essere 
-interrotta da colate laviche, esplosioni maggiori e parossismi, questi ultimi rappresentando le manifestazioni più pericolose dell'attività vulcanica 
-dell'isola. Associate alle colonne eruttive sono associate piogge di clasti balistici (blocchi e bombe) che, possono appicare incendi che si propagano
-nella macchia mediterranea dell'isola.
+intecalata da colate laviche o parossismi maggiormente esplosivi, questi ultimi rappresentando le manifestazioni più pericolose dell'attività vulcanica 
+dell'isola. Dallo sviluppo delle colonne eruttive sono associate piogge di clasti balistici (bombe iuvenili incandescenti) che, in presenza di vegetazione 
+arida o semi-arida, possono appicare incendi.
 Questo fenomeno è documentato più volte nella storia recente dell'isola (1930, 1943 e 1950) e si è ripetuto nell'estate 2019 (Iacono et al., 2025).
 
 Il parossismo del 3 luglio 2019 è iniziato nel primo pomeriggio con un'esplosione improvvisa che ha causato la ricaduta di scorie incandescenti fino al'abitato
@@ -50,10 +50,10 @@ distrutto la centrale elettrica e causato la morte di una persona.
 
 Le immagini satellitari Sentinel-2 impiegate in questo lavoro sono state reperite manualmente attraverso il Copernicus Browser dell'ESA.
 Questa scelta è stata motivata da due esigenze: da un lato, le indagini richiedevano acquisizioni puntuali e circoscritte a finestre temporali molto ristrette
-(pre-parossismo, immediatamente post-parossismo, a un anno di distanza), per cui un prodotto mediato su più immagini, come tipicamente restituito da GEE, 
+(immediato pre-parossismo e post-parossismo), per cui un prodotto mediato su più immagini, come tipicamente restituito da GEE, 
 avrebbe potuto diluire o mascherare il segnale d'interesse; dall'altro, trattandosi di un vulcano attivo, le condizioni di copertura nuvolosa nelle fasi 
 successive a un'eruzione sono spesso sfavorevoli, ed era quindi necessario poter scegliere manualmente le immagini con la minore copertura 
-nuvolosa sull'area di interesse e avere maggiore flessibilità nella selezione delle bande da scaricare per poter testare numerosi indici spettrale.
+nuvolosa sull'area di interesse e avere maggiore flessibilità nella selezione delle bande da scaricare per poter testare numerosi indici spettrali.
 
 L'elaborazione dei dati è stata condotta interamente in ambiente R, utilizzando funzioni di R base insieme ai seguenti pacchetti:
 
@@ -101,37 +101,32 @@ confronto multitemporale corretto:
 # Confrontiamo giugno, agosto e giugno 2020 per essere sicuri che le tre immagini siano proiettate nello stesso
 # sistema di riferimento e che si sovrappongano alla perfezione
 
-crs(b2_giu19)
-# "PROJCRS[\"WGS 84 / UTM zone 33N\",\n
-crs(b2_ago19) 
-# "PROJCRS[\"WGS 84 / UTM zone 33N\",\n
-crs(b2_giu20)
-# "PROJCRS[\"WGS 84 / UTM zone 33N\",\n
+crs(b2_giu19)            # "PROJCRS[\"WGS 84 / UTM zone 33N\",\n
+crs(b2_ago19)            # "PROJCRS[\"WGS 84 / UTM zone 33N\",\n
+crs(b2_giu20)            # "PROJCRS[\"WGS 84 / UTM zone 33N\",\n
 
-ext(b2_giu19)
-# SpatExtent : 499980, 609780, 4190220, 4300020 (xmin, xmax, ymin, ymax)
-ext(b2_ago19)
-# SpatExtent : 499980, 609780, 4190220, 4300020 (xmin, xmax, ymin, ymax)
-ext(b2_giu20)
-# SpatExtent : 499980, 609780, 4190220, 4300020 (xmin, xmax, ymin, ymax)
+ext(b2_giu19)            # SpatExtent : 499980, 609780, 4190220, 4300020 (xmin, xmax, ymin, ymax)
+ext(b2_ago19)            # SpatExtent : 499980, 609780, 4190220, 4300020 (xmin, xmax, ymin, ymax)
+ext(b2_giu20)            # SpatExtent : 499980, 609780, 4190220, 4300020 (xmin, xmax, ymin, ymax)
 ```
 
-Confermata la coerenza spaziale, è stata definita un'estensione ridotta intorno all'isola per il ritaglio (crop) di tutte le bande; la banda B12, nativa a 20 
-m, è stata inoltre ricampionata con metodo bilineare sulla griglia a 10 m delle altre bande, in modo da ottenere stack multibanda omogenei:
+Confermata la coerenza spaziale, è stata definita un'estensione ridotta intorno all'isola per il ritaglio, eseguito con la funzione `crop()` del pacchetto `terra`,
+di tutte le bande. Le coordinate erano precedentemente ottenute con la funzione `locator()`
+Inoltre, la banda B12, nativa a 20 m, è stata ricampionata con metodo bilineare sulla griglia a 10 m delle altre bande
+con la funzione `resample()` di `terra`, in modo da ottenere stack multibanda omogenei:
 
 ```r
-# DEFINIZIONE ESTENSIONE E RITAGLIO (CROP)
+# DEFINIZIONE dell'ESTENSIONE e RITAGLIO (CROP)
 
 # Ordine richiesto dalla funzione ext(): xmin, xmax, ymin, ymax
-estensione_stromboli <- ext(515715, 521500, 4291265, 4296385)
+estensione_stromboli <- ext(515715, 521500, 4291265, 4296385)     
 
-# RITAGLIO (CROP) DI TUTTE LE BANDE DI GIUGNO 2019
-b2_giu19_crop <- crop(b2_giu19, estensione_stromboli)
+# RITAGLIO DI TUTTE LE BANDE DI GIUGNO 2019
+b2_giu19_crop <- crop(b2_giu19, estensione_stromboli)                                               # ritaglia la banda secondo le coordinate fornite
 b3_giu19_crop <- crop(b3_giu19, estensione_stromboli)
 b4_giu19_crop <- crop(b4_giu19, estensione_stromboli)
 b8_giu19_crop <- crop(b8_giu19, estensione_stromboli)
-# Ritaglio e ricampionamento della Banda 12 sulla griglia a 10m (B2) per Giugno 2019
-b12_giu19_crop <- resample(crop(b12_giu19, estensione_stromboli), b2_giu19_crop, method="bilinear")
+b12_giu19_crop <- resample(crop(b12_giu19, estensione_stromboli), b2_giu19_crop, method="bilinear") # ritaglia e ricampiona b12 sulla griglia di b2
 ```
 Anche in questo caso, lo stesso procedimento è stato ultimato per le altre due date.
 
@@ -213,11 +208,11 @@ L'assorbimento della banda rossa ritorna alle condizioni pre-parossismo ma il NI
 
 ```r
 # VISUALIZZAZIONE IN COLORI REALI (True Color - RGB 3,2,1)
-par(mfrow = c(1, 3), mar = c(3, 3, 4, 2))  # rendo l'immagine multiframe e sistemo i margini per ottimizzare la visualizzazione
+par(mfrow = c(1, 3), mar = c(3, 3, 4, 2))    # Rendiamo l'immagine multiframe e sistemo i margini per ottimizzare la visualizzazione
 plotRGB(str_giu_19, r=3, g=2, b=1, stretch="lin", main="Giugno 2019 (Pre)")
 plotRGB(str_ago_19, r=3, g=2, b=1, stretch="lin", main="Agosto 2019 (Post)")
 plotRGB(str_giu_20, r=3, g=2, b=1, stretch="lin", main="Giugno 2020 (Recupero)")
-dev.off()
+dev.off()                                     # Chiudere il pannello di visualizzazione e ristabilire il formato di default 
 ```
 
 <img width="1000" alt="true_color_confronto" src="https://github.com/user-attachments/assets/ce475319-2ea7-4d73-a7d6-66bd93cf9b7b" />
@@ -227,24 +222,25 @@ Gli effetti dell'eruzione del 2019 sono apprezzabili anche dall'occhio umano: la
 ```r
 # VISUALIZZAZIONE IN FALSI COLORI (RGB 4,3,2)
 par(mfrow = c(1, 3), mar = c(3, 3, 4, 2))
-plotRGB(str_giu_19, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Giugno 2019")
+plotRGB(str_giu_19, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Giugno 2019")   # Assegnamo il colore rosso al NIR
 plotRGB(str_ago_19, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Agosto 2019")
 plotRGB(str_giu_20, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Giugno 2020")
-dev.off() # Chiudere il pannello di Visualizzazione delle immagini e ristabilire il formato dei grafici a quello di default
+dev.off() 
 ```
 <img width="1000" alt="false_color_confronto" src="https://github.com/user-attachments/assets/7474e769-051f-4120-b74c-8a118a54a738" />
 
-Nel falso colore (NIR-Rosso-Verde) la vegetazione sana appare tipicamente in tonalità rosse/rosate: una riduzione di queste tonalità tra giugno e agosto 2019 è il segnale atteso dell'impatto degli incendi.
+Nel falso colore (NIR-Rosso-Verde) la vegetazione sana appare tipicamente in tonalità rosse/rosate: una riduzione di queste tonalità tra giugno e agosto 2019 è il 
+segnale atteso dell'impatto degli incendi.
 
 ### 5.5 Confronto diretto delle bande RGB + NIR
 
-Per osservare con maggior dettaglio gli effetti immediati dell'eruzione, andiamo a plottare un confronto banda a banda fra giugno e agosto 2019
+Per osservare con maggior dettaglio gli effetti immediati dell'eruzione, andiamo a plottare un confronto banda a banda fra giugno e agosto 2019,
+in una palette `inferno()` del pacchetto `viridis`
 
 ```r
-png("immagini progetto stromboli/confronto_bande_19_pre_post.png", width = 16, height = 8, units = "in", res = 300)
 par(mfrow = c(2, 4), mar = c(4, 3, 4, 5)) # Dividiamo lo schermo in 2 righe (sopra Giugno, sotto Agosto) e 4 colonne (B2, B3, B4, B8)
 # RIGA 1: Giugno 2019 (Pre-eruzione)
-plot(str_giu_19[["B2"]], col = inferno(100), main = "Pre - Blu (B2)")
+plot(str_giu_19[["B2"]], col = inferno(100), main = "Pre - Blu (B2)")       
 plot(str_giu_19[["B3"]], col = inferno(100), main = "Pre - Verde (B3)")
 plot(str_giu_19[["B4"]], col = inferno(100), main = "Pre - Rosso (B4)")
 plot(str_giu_19[["B8"]], col = inferno(100), main = "Pre - NIR (B8)")
@@ -273,12 +269,12 @@ Per ciascuna delle tre date sono stati calcolati gli indici DVI, NDVI e NBR e pe
 Non essendo normalizzato, il DVI va letto soprattutto in termini relativi tra le tre date piuttosto che in valore assoluto.
 
 ```r
-# Calcolo degli indici con una semplice differenza tra bande
+# Calcolo degli indici con una semplice differenza tra bande, che seleziono con le `[]`
 dvi_giu_19 <- str_giu_19[["B8"]] - str_giu_19[["B4"]]
 dvi_ago_19 <- str_ago_19[["B8"]] - str_ago_19[["B4"]]
 dvi_giu_20 <- str_giu_20[["B8"]] - str_giu_20[["B4"]]
 
-# Calcolo delle differenze
+# Calcolo delle differenze tra indici
 ddvi_19    <- dvi_giu_19 - dvi_ago_19  # Impatto immediato dell'eruzione
 ddvi_20    <- dvi_ago_19 - dvi_giu_20  # Recupero post-evento
 ddvi_netto <- dvi_giu_19 - dvi_giu_20  # Bilancio del danno netto a un anno
