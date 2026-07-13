@@ -251,44 +251,34 @@ dev.off()
 
 <img width="4800" height="2400" alt="confronto_bande_19_pre_post" src="https://github.com/user-attachments/assets/ea0481d3-24e6-4cd2-9111-b85e36384f05" />
 
-Questa immagine mostra come la maggior differenza non si ha nelle bande del visibile, le quali sono in entrambi i casi caratterizzate da un assorbimento 
+Questa immagine mostra come la maggior differenza non si presenta nelle bande del visibile, le quali sono in entrambi i casi caratterizzate da un assorbimento 
 elevato, ma dalla riflettanza del NIR, la quale subisce un crollo causato dalla devastazione della vegetazione
 
 ## 6. Calcolo degli indici spettrali di vegetazione
 
-Per ciascuna delle tre date sono stati calcolati gli indici DVI, NDVI e NBR, e per ciascun indice sono state calcolate tre differenze: l'impatto immediato del parossismo (giugno vs agosto 2019), il recupero a un anno (agosto 2019 vs giugno 2020) e il bilancio netto su base annuale (giugno 2019 vs giugno 2020).
+Per ciascuna delle tre date sono stati calcolati gli indici DVI, NDVI e NBR e per ciascun indice sono state calcolate tre differenze: l'impatto immediato del parossismo (giugno vs agosto 2019), il recupero a un anno (agosto 2019 vs giugno 2020) e il bilancio netto su base annuale (giugno 2019 vs giugno 2020).
 
 ### 6.1 DVI (Difference Vegetation Index)
 
 ```r
-# CALCOLO DEGLI INDICI VEGETAZIONALI, DIFFERENZE E ESPORTAZIONE
-
-# INDICE DVI (Difference Vegetation Index)
-
-# Calcolo indici
+# Calcolo degli indici con una semplice differenza tra bande
 dvi_giu_19 <- str_giu_19[["B8"]] - str_giu_19[["B4"]]
 dvi_ago_19 <- str_ago_19[["B8"]] - str_ago_19[["B4"]]
 dvi_giu_20 <- str_giu_20[["B8"]] - str_giu_20[["B4"]]
 
-# Calcolo differenze
+# Calcolo delle differenze
 ddvi_19    <- dvi_giu_19 - dvi_ago_19  # Impatto immediato dell'eruzione
 ddvi_20    <- dvi_ago_19 - dvi_giu_20  # Recupero post-evento
 ddvi_netto <- dvi_giu_19 - dvi_giu_20  # Bilancio del danno netto a un anno
-```
-
-```r
-# VISUALIZZAZIONE E ESPORTAZIONE DVI
 
 # Grafico 1: Impatto Immediato DVI (2019)
-png("immagini progetto stromboli/dvi_impatto_2019.png", width = 14, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(dvi_giu_19, col = cividis(100), main = "DVI Giugno 2019 (Pre)")
 plot(dvi_ago_19, col = cividis(100), main = "DVI Agosto 2019 (Post)")
 plot(ddvi_19, col = colorRampPalette(c("grey", "black"))(100), main = "Delta DVI (Impatto 2019)")
 dev.off()
 ```
-
-**[INSERISCI QUI: `dvi_impatto_2019.png`]**
+<img width="4200" height="1500" alt="dvi_impatto_2019" src="https://github.com/user-attachments/assets/e13de17f-48a0-4ef3-9660-16e71e8dcd1f" />
 
 ```r
 # Grafico 2: Recupero DVI (2019 vs 2020)
@@ -300,7 +290,7 @@ plot(ddvi_20, col = colorRampPalette(c("grey", "black"))(100), main = "Delta DVI
 dev.off()
 ```
 
-**[INSERISCI QUI: `dvi_recupero_2020.png`]**
+<img width="4200" height="1500" alt="dvi_recupero_2020" src="https://github.com/user-attachments/assets/776a020e-bd0c-4b84-8647-7bd18fe68f28" />
 
 ```r
 # Grafico 3: Bilancio Netto Annuale DVI (Giugno vs Giugno)
@@ -312,7 +302,7 @@ plot(ddvi_netto, col = colorRampPalette(c("grey", "black"))(100), main = "Delta 
 dev.off()
 ```
 
-**[INSERISCI QUI: `dvi_bilancio_annuale.png`]**
+<img width="4200" height="1500" alt="dvi_bilancio_annuale" src="https://github.com/user-attachments/assets/63119cf9-627b-4b1d-bf0f-da2e3f01c42f" />
 
 *Non essendo normalizzato, il DVI va letto soprattutto in termini relativi tra le tre date piuttosto che in valore assoluto.* **Completa qui con il commento ai tre grafici DVI:** ______________________________
 
@@ -336,7 +326,6 @@ dndvi_netto <- ndvi_giu_19 - ndvi_giu_20  # Bilancio del vigore netto a un anno
 # VISUALIZZAZIONE E ESPORTAZIONE NDVI
 
 # Grafico 1: Impatto Immediato NDVI (2019)
-png("immagini progetto stromboli/ndvi_impatto_2019.png", width = 14, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_giu_19, col = mako(100), main = "NDVI Giugno 2019 (Pre)")
 plot(ndvi_ago_19, col = mako(100), main = "NDVI Agosto 2019 (Post)")
@@ -344,11 +333,10 @@ plot(dndvi_19, col = colorRampPalette(c("grey", "black"))(100), main = "Delta ND
 dev.off()
 ```
 
-**[INSERISCI QUI: `ndvi_impatto_2019.png`]**
+<img width="4200" height="1500" alt="ndvi_impatto_2019" src="https://github.com/user-attachments/assets/47b7e9b5-5990-4fb8-a4b7-2a6699fa846d" />
 
 ```r
 # Grafico 2: Recupero NDVI (2019 vs 2020)
-png("immagini progetto stromboli/ndvi_recupero_2020.png", width = 14, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_ago_19, col = mako(100), main = "NDVI Agosto 2019 (Post)")
 plot(ndvi_giu_20, col = mako(100), main = "NDVI Giugno 2020 (Recupero)")
@@ -356,11 +344,10 @@ plot(dndvi_20, col = colorRampPalette(c("grey", "black"))(100), main = "Delta ND
 dev.off()
 ```
 
-**[INSERISCI QUI: `ndvi_recupero_2020.png`]**
+<img width="4200" height="1500" alt="ndvi_recupero_2020" src="https://github.com/user-attachments/assets/927b4279-9d7b-4ca2-9aee-02555e5ac220" />
 
 ```r
 # Grafico 3: Bilancio Netto Annuale NDVI (Giugno vs Giugno)
-png("immagini progetto stromboli/ndvi_bilancio_annuale.png", width = 14, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_giu_19, col = mako(100), main = "NDVI Giugno 2019 (Pre)")
 plot(ndvi_giu_20, col = mako(100), main = "NDVI Giugno 2020 (Recupero)")
@@ -368,7 +355,7 @@ plot(dndvi_netto, col = colorRampPalette(c("grey", "black"))(100), main = "Delta
 dev.off()
 ```
 
-**[INSERISCI QUI: `ndvi_bilancio_annuale.png`]**
+<img width="4200" height="1500" alt="ndvi_bilancio_annuale" src="https://github.com/user-attachments/assets/2f43c407-fa28-4f02-b2de-f7684424f379" />
 
 *In letteratura, l'impatto degli incendi del 2019 su Stromboli è stato descritto come particolarmente marcato nei settori occidentale e sud-occidentale dell'isola (Iacono et al., 2025): è un utile riferimento per verificare se il pattern spaziale del tuo Delta NDVI vada nella stessa direzione.* **Completa qui:** ______________________________
 
@@ -392,7 +379,6 @@ dnbr_netto <- nbr_giu_19 - nbr_giu_20  # Severità del danno permanente a un ann
 # VISUALIZZAZIONE E ESPORTAZIONE NBR
 
 # Grafico 1: Impatto Immediato NBR (2019)
-png("immagini progetto stromboli/nbr_impatto_2019.png", width = 14, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_giu_19, col = rocket(100), main = "NBR Giugno 2019 (Pre)")
 plot(nbr_ago_19, col = rocket(100), main = "NBR Agosto 2019 (Post)")
@@ -400,11 +386,10 @@ plot(dnbr_19, col = colorRampPalette(c("grey", "black"))(100), main = "Delta NBR
 dev.off()
 ```
 
-**[INSERISCI QUI: `nbr_impatto_2019.png`]**
+<img width="4200" height="1500" alt="nbr_impatto_2019" src="https://github.com/user-attachments/assets/5fcb3850-ef08-4558-8e5d-dfea27456075" />
 
 ```r
 # Grafico 2: Recupero NBR (Agosto 2019 vs Giugno 2020)
-png("immagini progetto stromboli/nbr_recupero_2020.png", width = 14, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_ago_19, col = rocket(100), main = "NBR Agosto 2019 (Post)")
 plot(nbr_giu_20, col = rocket(100), main = "NBR Giugno 2020 (Recupero)")
@@ -412,11 +397,10 @@ plot(dnbr_20, col = colorRampPalette(c("grey", "black"))(100), main = "Delta NBR
 dev.off()
 ```
 
-**[INSERISCI QUI: `nbr_recupero_2020.png`]**
+<img width="4200" height="1500" alt="nbr_recupero_2020" src="https://github.com/user-attachments/assets/497a71c1-e34f-447e-8a48-ad519f5117e7" />
 
 ```r
 # Grafico 3: Bilancio Netto Annuale NBR (Giugno 19 vs Giugno 20)
-png("immagini progetto stromboli/nbr_bilancio_annuale.png", width = 14, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_giu_19, col = rocket(100), main = "NBR Giugno 2019 (Pre)")
 plot(nbr_giu_20, col = rocket(100), main = "NBR Giugno 2020 (Recupero)")
@@ -424,18 +408,18 @@ plot(dnbr_netto, col = colorRampPalette(c("grey", "black"))(100), main = "Delta 
 dev.off()
 ```
 
-**[INSERISCI QUI: `nbr_bilancio_annuale.png`]**
+<img width="4200" height="1500" alt="ndvi_bilancio_annuale" src="https://github.com/user-attachments/assets/76971750-8d9b-436b-860e-b44dd704fd29" />
 
 *Il NBR, sfruttando lo SWIR, dovrebbe evidenziare in modo più netto le aree effettivamente percorse dal fuoco (cenere/suolo esposto) rispetto al NDVI, che risente più in generale dello stato di salute della vegetazione.* **Completa qui:** ______________________________
 
 ## 7.1 Classificazione tramite maschera ternaria
 
-Per ottenere una stima quantitativa (non solo qualitativa) dell'impatto sulla copertura del suolo, è stata costruita per ciascuna data una classificazione ternaria in tre classi — mare, suolo nudo/cenere, vegetazione — basata su semplici soglie applicate a NDWI e NDVI.
+Per ottenere una stima quantitativa dell'impatto sulla copertura del suolo, è stata costruita, per ciascuna data, una classificazione in tre classi (mare, suolo nudo/cenere, vegetazione) basata su semplici soglie applicate a NDWI e NDVI.
 
-Il primo passo è stato calcolare l'NDWI su tutte e tre le date; come indicato in precedenza, il suo utilizzo qui non è finalizzato a una vera e propria caratterizzazione idrologica, ma esclusivamente a isolare i pixel di mare (valori di NDWI positivi) e poterli quindi trattare come classe a sé nella classificazione:
+Il primo passo è stato calcolare l'NDWI su tutte e tre le date: come indicato in precedenza, il suo utilizzo qui non è finalizzato a una vera e propria caratterizzazione idrologica, ma esclusivamente a isolare i pixel di mare (valori di NDWI positivi) e poterli quindi trattare come a sè stanti nella classificazione:
 
 ```r
-# MASCHERE E MAPPE TERNARIE DI COPERTURA CON INDICI NORMALIZZATI E SINTASSI LEZIONE
+# MASCHERE E MAPPE TERNARIE DI COPERTURA CON INDICI NORMALIZZATI 
 
 # CALCOLO DELL INDICE IDRICO NDWI PER TUTTE E TRE LE DATE
 ndwi_giu19 <- (str_giu_19[["B3"]] - str_giu_19[["B8"]]) / (str_giu_19[["B3"]] + str_giu_19[["B8"]])
@@ -449,17 +433,17 @@ Le tre classi sono state definite secondo la seguente logica: NDWI > 0 identific
 # CONDIZIONI LOGICHE E IDENTIFICAZIONE CLASSI STABILI
 # L'acqua ha valori positivi di NDWI, la terraferma ha valori negativi
 
-# GIUGNO 2019 PRE ERUZIONE
+# GIUGNO 2019 
 mare_giu19  <- ndwi_giu19 > 0
 veg_giu19   <- ndvi_giu_19 > 0.27
 suolo_giu19 <- ndwi_giu19 <= 0 & ndvi_giu_19 <= 0.27
 
-# AGOSTO 2019 POST ERUZIONE
+# AGOSTO 2019 
 mare_ago19  <- ndwi_ago19 > 0
 veg_ago19   <- ndvi_ago_19 > 0.27
 suolo_ago19 <- ndwi_ago19 <= 0 & ndvi_ago_19 <= 0.27
 
-# IMMAGINE DI GIUGNO 2020 RECUPERO
+# GIUGNO 2020 
 mare_giu20  <- ndwi_giu20 > 0
 veg_giu20   <- ndvi_giu_20 > 0.27
 suolo_giu20 <- ndwi_giu20 <= 0 & ndvi_giu_20 <= 0.27
@@ -468,8 +452,6 @@ suolo_giu20 <- ndwi_giu20 <= 0 & ndvi_giu_20 <= 0.27
 Le tre classi (codificate 1 = mare, 2 = suolo, 3 = vegetazione) sono state quindi assegnate a una mappa derivata dall'NDVI:
 
 ```r
-# CREAZIONE DELLA MAPPA TERNARIA
-
 # Giugno 2019
 clas_giu19 <- ndvi_giu_19
 clas_giu19[mare_giu19]  <- 1  # ID 1 = Mare
@@ -488,10 +470,9 @@ clas_giu20[mare_giu20]  <- 1
 clas_giu20[suolo_giu20] <- 2
 clas_giu20[veg_giu20]   <- 3
 ```
+La mappa è stata quindi rappresentata in tre colori della palette "cividis"
 
 ```r
-# VISUALIZZAZIONE E ESPORTAZIONE MAPPE TERNARIE 1x3
-png("immagini progetto stromboli/classificazione_ternaria_confronto.png", width = 15, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(clas_giu19, col = cividis(3), main = "Mappa Ternaria Giugno 2019 (Pre)")
 plot(clas_ago19, col = cividis(3), main = "Mappa Ternaria Agosto 2019 (Post)")
@@ -499,11 +480,13 @@ plot(clas_giu20, col = cividis(3), main = "Mappa Ternaria Giugno 2020 (Recupero)
 dev.off()
 ```
 
-**[INSERISCI QUI: `classificazione_ternaria_confronto.png`]**
+<img width="4500" height="1500" alt="classificazione_ternaria_confronto" src="https://github.com/user-attachments/assets/47c0cd75-a11a-46cf-8776-d25eedbf5af3" />
+
+La classificazione risente di alcuni valori anomali fra i pixel di acqua di giugno 2019 e di una nuvola in agosto, ma mostra chiaramente "l'avanzare" del suolo
+nudo/cenere nell'immediato intorno dell'eruzione e una parziale ripresa della vegetazione dopo un anno di recupero.
 
 ```r
 # ESPORTAZIONE MASCHERE BINARIE SOLO VEGETAZIONE 1x3
-png("immagini progetto stromboli/confronto_maschere_vegetazione.png", width = 15, height = 5, units = "in", res = 300)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(veg_giu19, col = gray.colors(2), main = "Vegetazione - Giugno 2019 (Pre)")
 plot(veg_ago19, col = gray.colors(2), main = "Vegetazione - Agosto 2019 (Post)")
@@ -511,9 +494,11 @@ plot(veg_giu20, col = gray.colors(2), main = "Vegetazione - Giugno 2020 (Recuper
 dev.off()
 ```
 
-**[INSERISCI QUI: `confronto_maschere_vegetazione.png`]**
+<img width="4500" height="1500" alt="confronto_maschere_vegetazione" src="https://github.com/user-attachments/assets/56be8492-bc1d-4493-8fbe-cd0a756d17de" />
 
-*Le mappe ternarie dovrebbero mostrare una netta espansione della classe "suolo nudo/cenere" ad agosto 2019, con parziale ritorno della classe "vegetazione" a giugno 2020; le maschere binarie isolano solo quest'ultimo cambiamento.* **Completa qui:** ______________________________
+LE maschere binarie isolano il cambiamento della vegetazione, isolando elevati valori di NDVI come "marker" di una vegetazione ancora in salute: se nel settore
+orientale dell'isola la ripresa dagli incendi è stata incoraggiante, le altre aree di Stromboli appaiono ancora profondamente colpiti a un anno dal parossismo 
+vulcanico
 
 ## 7.2 Percentuali di copertura sulla terraferma e Ridgeline plot
 
@@ -525,6 +510,8 @@ freq_giu19 <- freq(clas_giu19)
 freq_ago19 <- freq(clas_ago19)
 freq_giu20 <- freq(clas_giu20)
 ```
+
+Si salva quindi la somma dei pixel di vegetazione e di suolo in un nuovo oggetto grazie all'operatore '$'
 
 ```r
 # ESTRAZIONE DEI CONTEGGI PURI PER ISOLARE LA TERRAFERMA ESCLUDENDO IL MARE
@@ -542,20 +529,17 @@ perc_veg_ago19   <- freq_ago19$count[3] * 100 / isola_ago19           # 8.070809
 
 perc_suolo_giu20 <- freq_giu20$count[2] * 100 / isola_giu20           # 74.82413
 perc_veg_giu20   <- freq_giu20$count[3] * 100 / isola_giu20           # 25.17587
+```
 
+Salviamo i risultati in una tabella 
+
+```r
 tabella_stromboli <- data.frame(
   Classe = c("Non vegetazione", "Vegetazione"),
   Pre_parossismo = round(c(perc_suolo_giu19, perc_veg_giu19), 2),
   Post_parossismo = round(c(perc_suolo_ago19, perc_veg_ago19), 2),
   Recupero_2020 = round(c(perc_suolo_giu20, perc_veg_giu20), 2)
 )
-#    Classe              Pre_parossismo    Post_parossismo   Recupero_2020
-#    Non vegetazione          64.21          91.93            74.82
-#    Vegetazione              35.79          8.07             25.18
-
-# ESPORTAZIONE DELLA TABELLA DATI IN FORMATO CSV
-write.csv(tabella_stromboli, "immagini progetto stromboli/tabella_frequenze_copertura.csv", row.names = FALSE)
-print(tabella_stromboli)
 ```
 
 I valori risultanti sono riassunti nella tabella seguente:
