@@ -199,7 +199,7 @@ png("immagini progetto stromboli/dvi_impatto_2019.png", width = 14, height = 5, 
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(dvi_giu_19, col = cividis(100), main = "DVI Giugno 2019 (Pre)")
 plot(dvi_ago_19, col = cividis(100), main = "DVI Agosto 2019 (Post)")
-plot(ddvi_19, col = turbo(100), main = "Delta DVI (Impatto 2019)")
+plot(ddvi_19, col = colorRampPalette(c("grey", "black"))(100), main = "Delta DVI (Impatto 2019)")
 dev.off()
 
 # Grafico 2: Recupero DVI (2019 vs 2020)
@@ -207,7 +207,7 @@ png("immagini progetto stromboli/dvi_recupero_2020.png", width = 14, height = 5,
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(dvi_ago_19, col = cividis(100), main = "DVI Agosto 2019 (Post)")
 plot(dvi_giu_20, col = cividis(100), main = "DVI Giugno 2020 (Recupero)")
-plot(ddvi_20, col = turbo(100), main = "Delta DVI (Recupero 19-20)")
+plot(ddvi_20, col = colorRampPalette(c("grey", "black"))(100), main = "Delta DVI (Recupero 19-20)")
 dev.off()
 
 # Grafico 3: Bilancio Netto Annuale DVI (Giugno vs Giugno)
@@ -215,7 +215,7 @@ png("immagini progetto stromboli/dvi_bilancio_annuale.png", width = 14, height =
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(dvi_giu_19, col = cividis(100), main = "DVI Giugno 2019 (Pre)")
 plot(dvi_giu_20, col = cividis(100), main = "DVI Giugno 2020 (Recupero)")
-plot(ddvi_netto, col = turbo(100), main = "Delta DVI Netto (Annuale)")
+plot(ddvi_netto, col = colorRampPalette(c("grey", "black"))(100), main = "Delta DVI Netto (Annuale)")
 dev.off()
 
 # INDICE NDVI (Normalized Difference Vegetation Index)
@@ -237,7 +237,7 @@ png("immagini progetto stromboli/ndvi_impatto_2019.png", width = 14, height = 5,
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_giu_19, col = mako(100), main = "NDVI Giugno 2019 (Pre)")
 plot(ndvi_ago_19, col = mako(100), main = "NDVI Agosto 2019 (Post)")
-plot(dndvi_19, col = turbo(100), main = "Delta NDVI (Impatto 2019)")
+plot(dndvi_19, col = colorRampPalette(c("grey", "black"))(100), main = "Delta NDVI (Impatto 2019)")
 dev.off()
 
 # Grafico 2: Recupero NDVI (2019 vs 2020)
@@ -245,7 +245,7 @@ png("immagini progetto stromboli/ndvi_recupero_2020.png", width = 14, height = 5
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_ago_19, col = mako(100), main = "NDVI Agosto 2019 (Post)")
 plot(ndvi_giu_20, col = mako(100), main = "NDVI Giugno 2020 (Recupero)")
-plot(dndvi_20, col = turbo(100), main = "Delta NDVI (Recupero 19-20)")
+plot(dndvi_20, col = colorRampPalette(c("grey", "black"))(100), main = "Delta NDVI (Recupero 19-20)")
 dev.off()
 
 # Grafico 3: Bilancio Netto Annuale NDVI (Giugno vs Giugno)
@@ -253,46 +253,9 @@ png("immagini progetto stromboli/ndvi_bilancio_annuale.png", width = 14, height 
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_giu_19, col = mako(100), main = "NDVI Giugno 2019 (Pre)")
 plot(ndvi_giu_20, col = mako(100), main = "NDVI Giugno 2020 (Recupero)")
-plot(dndvi_netto, col = turbo(100), main = "Delta NDVI Netto (Annuale)")
+plot(dndvi_netto, col = colorRampPalette(c("grey", "black"))(100), main = "Delta NDVI Netto (Annuale)")
 dev.off()
 
-# INDICE SAVI (Soil Adjusted Vegetation Index)
-
-# Calcolo indici con L = 0.5 per correzione del fondo roccioso/cenere
-savi_giu_19 <- ((str_giu_19[["B8"]] - str_giu_19[["B4"]]) / (str_giu_19[["B8"]] + str_giu_19[["B4"]] + 0.5)) * (1 + 0.5)
-savi_ago_19 <- ((str_ago_19[["B8"]] - str_ago_19[["B4"]]) / (str_ago_19[["B8"]] + str_ago_19[["B4"]] + 0.5)) * (1 + 0.5)
-savi_giu_20 <- ((str_giu_20[["B8"]] - str_giu_20[["B4"]]) / (str_giu_20[["B8"]] + str_giu_20[["B4"]] + 0.5)) * (1 + 0.5)
-
-# Calcolo differenze
-dsavi_19    <- savi_giu_19 - savi_ago_19  # Impatto eruzione corretto per il suolo
-dsavi_20    <- savi_ago_19 - savi_giu_20  # Recupero corretto per il suolo
-dsavi_netto <- savi_giu_19 - savi_giu_20  # Bilancio netto annuale corretto
-
-# VISUALIZZAZIONE E ESPORTAZIONE SAVI
-
-# Grafico 1: Impatto Immediato SAVI (2019)
-png("immagini progetto stromboli/savi_impatto_2019.png", width = 14, height = 5, units = "in", res = 300)
-par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
-plot(savi_giu_19, col = viridis(100), main = "SAVI Giugno 2019 (Pre)")
-plot(savi_ago_19, col = viridis(100), main = "SAVI Agosto 2019 (Post)")
-plot(dsavi_19, col = turbo(100), main = "Delta SAVI (Impatto 2019)")
-dev.off()
-
-# Grafico 2: Recupero SAVI (2019 vs 2020)
-png("immagini progetto stromboli/savi_recupero_2020.png", width = 14, height = 5, units = "in", res = 300)
-par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
-plot(savi_ago_19, col = viridis(100), main = "SAVI Agosto 2019 (Post)")
-plot(savi_giu_20, col = viridis(100), main = "SAVI Giugno 2020 (Recupero)")
-plot(dsavi_20, col = turbo(100), main = "Delta SAVI (Recupero 19-20)")
-dev.off()
-
-# Grafico 3: Bilancio Netto Annuale SAVI (Giugno vs Giugno)
-png("immagini progetto stromboli/savi_bilancio_annuale.png", width = 14, height = 5, units = "in", res = 300)
-par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
-plot(savi_giu_19, col = viridis(100), main = "SAVI Giugno 2019 (Pre)")
-plot(savi_giu_20, col = viridis(100), main = "SAVI Giugno 2020 (Recupero)")
-plot(dsavi_netto, col = turbo(100), main = "Delta SAVI Netto (Annuale)")
-dev.off()
 
 # INDICE NBR (Normalized Burn Ratio)
 
@@ -332,30 +295,6 @@ plot(nbr_giu_20, col = rocket(100), main = "NBR Giugno 2020 (Recupero)")
 plot(dnbr_netto, col = turbo(100), main = "Delta NBR Netto (Annuale)")
 dev.off()
 
-# ASSESSMENT GEOLOGICO E PETROGRAFICO: RAPPORTI TRA BANDE (BAND RATIOS)
-
-# Carichiamo la Banda 11 originaria a 20 metri per Giugno e Agosto 2019
-b11_giu19_raw <- rast("S2A_MSIL2A_20190607T095031_N0500_R079_T33SWC_20221219T154232.SAFE/GRANULE/L2A_T33SWC_A020668_20190607T095825/IMG_DATA/R20m/T33SWC_20190607T095031_B11_20m.jp2")
-b11_ago19_raw <- rast("S2B_MSIL2A_20190811T095039_N0500_R079_T33SWC_20230505T051258.SAFE/GRANULE/L2A_T33SWC_A012689_20190811T095702/IMG_DATA/R20m/T33SWC_20190811T095039_B11_20m.jp2")
-
-# Ritaglio ed allineamento geometrico (ricampionamento) sulla griglia a 10m (B2) per omogeneità
-b11_giu19_crop <- resample(crop(b11_giu19_raw, estensione_stromboli), b2_giu19_crop, method="bilinear")
-b11_ago19_crop <- resample(crop(b11_ago19_raw, estensione_stromboli), b2_ago19_crop, method="bilinear")
-
-
-
-
-# 2. PLOT MINERALI FERROSI 
-ferrous_giu_19 <- str_giu_19[["B12"]] / str_giu_19[["B8"]]
-ferrous_ago_19 <- str_ago_19[["B12"]] / str_ago_19[["B8"]]
-
-limiti_ferrous <- quantiles(c(ferrous_giu_19, ferrous_ago_19), probs = c(0.005, 0.995))
-
-png("immagini progetto stromboli/geologia_ferrous_minerals_confronto.png", width = 10, height = 5, units = "in", res = 300)
-par(mfrow = c(1, 2), mar = c(4, 3, 4, 5))
-plot(ferrous_giu_19, col = mako(100), range = limiti_ferrous, main = "Minerali Ferrosi - Giugno 2019 (Pre)")
-plot(ferrous_ago_19, col = mako(100), range = limiti_ferrous, main = "Minerali Ferrosi - Agosto 2019 (Post)")
-dev.off()
 
 # MASCHERE E MAPPE TERNARIE DI COPERTURA CON INDICI NORMALIZZATI E SINTASSI LEZIONE
 
