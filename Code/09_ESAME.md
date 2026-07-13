@@ -1,5 +1,4 @@
-# Monitoraggio temporale degli effetti delle eruzioni vulcaniche sull'Isola di Stromboli
-MONITORAGGIO TEMPORALE DEGLI EFFETTI
+# MONITORAGGIO TEMPORALE DEGLI EFFETTI DELLE ERUZIONI VULCANICHE SULLA VEGETAZIONE - IL CASO STUDIO DELL'ISOLA DI STROMBOLI
 
 ## 1. Introduzione
 
