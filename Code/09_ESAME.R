@@ -295,7 +295,7 @@ plot(dnbr_netto, col = colorRampPalette(c("grey", "black"))(100), main = "Delta 
 dev.off()
 
 
-# MASCHERE E MAPPE TERNARIE DI COPERTURA CON INDICI NORMALIZZATI E SINTASSI LEZIONE
+# MASCHERE E MAPPE TERNARIE DI COPERTURA CON INDICI NORMALIZZATI 
 
 # CALCOLO DELL INDICE IDRICO NDWI PER TUTTE E TRE LE DATE
 ndwi_giu19 <- (str_giu_19[["B3"]] - str_giu_19[["B8"]]) / (str_giu_19[["B3"]] + str_giu_19[["B8"]])
