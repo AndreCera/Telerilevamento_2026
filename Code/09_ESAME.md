@@ -85,8 +85,10 @@ b8_giu19 <- rast("S2A_MSIL2A_20190607T095031_N0500_R079_T33SWC_20221219T154232.S
 # Caricamento della Banda 12 (SWIR) a 20 metri per Giugno 2019
 b12_giu19 <- rast("S2A_MSIL2A_20190607T095031_N0500_R079_T33SWC_20221219T154232.SAFE/GRANULE/L2A_T33SWC_A020668_20190607T095825/IMG_DATA/R20m/T33SWC_20190607T095031_B12_20m.jp2")
 ```
-La stessa procedura è stata eseguita per importare le bande di agosto 2019 e giugno 2020
-Prima di procedere, è stata verificata la coerenza spaziale (sistema di riferimento ed estensione) tra le tre acquisizioni, condizione necessaria per un confronto multitemporale corretto:
+La stessa procedura è stata eseguita per importare le bande di agosto 2019 e giugno 2020.
+
+Prima di procedere, è stata verificata la coerenza spaziale (sistema di riferimento ed estensione) tra le tre acquisizioni, condizione necessaria per un 
+confronto multitemporale corretto:
 
 ```r
 # Confrontiamo giugno, agosto e giugno 2020 per essere sicuri che le tre immagini siano proiettate nello stesso
@@ -125,6 +127,7 @@ b8_giu19_crop <- crop(b8_giu19, estensione_stromboli)
 b12_giu19_crop <- resample(crop(b12_giu19, estensione_stromboli), b2_giu19_crop, method="bilinear")
 ```
 Anche in questo caso, lo stesso procedimento è stato ultimato per le altre due date.
+
 Infine, le bande ritagliate sono state unite in tre stack multibanda (uno per data), con i livelli rinominati per rendere il codice successivo più leggibile:
 
 ```r
