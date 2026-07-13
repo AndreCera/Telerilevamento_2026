@@ -443,7 +443,7 @@ dev.off()
 
 Il bilancio annuale è inclemente, evidenziando settori ancora privi di vegetazione in diverse zone dell'isola.
 
-## 7.1 Classificazione tramite maschera ternaria
+## 7.1 Classificazione
 
 Per ottenere una stima quantitativa dell'impatto sulla copertura del suolo, è stata costruita, per ciascuna data, una classificazione in tre classi (mare, suolo nudo/cenere, vegetazione) basata su semplici soglie applicate a NDWI e NDVI.
 
@@ -458,7 +458,7 @@ ndwi_ago19 <- (str_ago_19[["B3"]] - str_ago_19[["B8"]]) / (str_ago_19[["B3"]] + 
 ndwi_giu20 <- (str_giu_20[["B3"]] - str_giu_20[["B8"]]) / (str_giu_20[["B3"]] + str_giu_20[["B8"]])
 ```
 
-Le tre classi sono state definite secondo la seguente logica: NDWI > 0 identifica il mare (l'acqua presenta valori positivi di NDWI, mentre la terraferma valori negativi); tra i pixel di terraferma, NDVI > 0.27 identifica la vegetazione, mentre i restanti pixel (NDWI ≤ 0 e NDVI ≤ 0.27) sono classificati come suolo nudo o cenere. La soglia di 0.27 sul NDVI è stata individuata empiricamente osservando la distribuzione dei valori sulla terraferma *(completa qui, se vuoi, con eventuali dettagli aggiuntivi sulla scelta della soglia: ______________________________)*:
+Le tre classi sono state definite secondo la seguente logica: NDWI > 0 identifica il mare (l'acqua presenta valori positivi di NDWI, mentre la terraferma valori negativi); tra i pixel di terraferma, NDVI > 0.27 identifica la vegetazione, mentre i restanti pixel (NDWI ≤ 0 e NDVI ≤ 0.27) sono classificati come suolo nudo o cenere. La soglia di 0.27 sul NDVI è stata individuata empiricamente osservando la distribuzione dei valori sulla terraferma con la funzione `click()` del pacchetto `terra`
 
 ```r
 # CONDIZIONI LOGICHE E IDENTIFICAZIONE CLASSI STABILI
@@ -501,7 +501,7 @@ clas_giu20[mare_giu20]  <- 1
 clas_giu20[suolo_giu20] <- 2
 clas_giu20[veg_giu20]   <- 3
 ```
-La mappa è stata quindi rappresentata in tre colori della palette "cividis"
+La mappa è stata infine rappresentata con tre colori della palette "cividis"
 
 ```r
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
@@ -527,8 +527,8 @@ dev.off()
 
 <img width="4500" height="1500" alt="confronto_maschere_vegetazione" src="https://github.com/user-attachments/assets/56be8492-bc1d-4493-8fbe-cd0a756d17de" />
 
-LE maschere binarie isolano il cambiamento della vegetazione, isolando elevati valori di NDVI come "marker" di una vegetazione ancora in salute: se nel settore
-orientale dell'isola la ripresa dagli incendi è stata incoraggiante, le altre aree di Stromboli appaiono ancora profondamente colpiti a un anno dal parossismo 
+Le maschere binarie isolano il cambiamento della vegetazione, isolando elevati valori di NDVI come "marker" di una vegetazione ancora in salute: se nel settore
+orientale dell'isola la ripresa dagli incendi è stata incoraggiante, le altre aree di Stromboli appaiono ancora profondamente colpite a un anno dal parossismo 
 vulcanico
 
 ## 7.2 Percentuali di copertura sulla terraferma e Ridgeline plot
@@ -542,7 +542,7 @@ freq_ago19 <- freq(clas_ago19)
 freq_giu20 <- freq(clas_giu20)
 ```
 
-Si salva quindi la somma dei pixel di vegetazione e di suolo in un nuovo oggetto grazie all'operatore '$'
+Si salva quindi la somma dei pixel di vegetazione e di suolo in un nuovo oggetto grazie all'operatore `$`
 
 ```r
 # ESTRAZIONE DEI CONTEGGI PURI PER ISOLARE LA TERRAFERMA ESCLUDENDO IL MARE
@@ -583,7 +583,7 @@ I valori risultanti sono riassunti nella tabella seguente:
 I dati mostrano una riduzione della superficie vegetata da quasi un 36% a 8% tra giugno e agosto 2019 (una perdita relativa di circa il 77% della vegetazione
 presente), seguita da un recupero parziale al 25% entro giugno 2020 — un valore ancora sensibilmente inferiore a quello precedente agli incendi.
 
-Tramite alla funzione melt di reshape2 e alla funzione ggplot() di ggplot2
+Tramite alla funzione `melt()` di `reshape2` e alla funzione `ggplot()` di `ggplot2`
 
 ```r
 # CONVERSIONE DELLA TABELLA PER GGPLOT2
