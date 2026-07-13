@@ -626,13 +626,21 @@ in qualche modo intermedia, coerentemente con un recupero solo parziale.
 
 ## Conclusioni
 
-L'analisi condotta sull'isola di Stromboli mostra un impatto netto del parossismo del 3 luglio 2019 e dei conseguenti incendi sulla copertura vegetale dell'isola: la percentuale di superficie classificata come vegetazione (NDVI > 0.27) è crollata dal 35,79% di giugno 2019 all'8,07% di agosto 2019, per poi risalire parzialmente al 25,18% a giugno 2020. Il quadro complessivo — una perdita di vegetazione severa e concentrata nell'immediato post-evento, seguita da un recupero apprezzabile ma non ancora completo a un anno di distanza — è coerente, dal punto di vista qualitativo, con quanto documentato in letteratura sugli incendi indotti dall'attività vulcanica a Stromboli nell'estate 2019, che hanno interessato porzioni significative dell'isola, in particolare nei settori occidentale e sud-occidentale, e per i quali sono comunque emerse indicazioni di una certa resilienza della vegetazione locale (Iacono et al., 2025).
+L'analisi condotta sull'isola di Stromboli mostra il netto impatto del parossismo del 3 luglio 2019 e dei conseguenti incendi sulla copertura vegetale dell'isola: la 
+percentuale di superficie classificata come vegetazione (NDVI > 0.27) è crollata di oltre di tre quarti ad agosto 2019, per poi ricrescere parzialmente di circa i due
+terzi dei valori originali a giugno 2020. Complessivamente, una perdita di vegetazione severa e concentrata nell'immediato post-evento, seguita da un recupero 
+apprezzabile ma non ancora completo ad un anno dal verificarsi della calamità, è coerente, dal punto di vista qualitativo, con quanto documentato in letteratura sugli 
+incendi indotti dall'attività vulcanica a Stromboli nell'estate 2019, che hanno interessato porzioni significative dell'isola, in particolare nei settori occidentale e 
+sud-occidentale, e per i quali sono comunque emerse indicazioni di una certa resilienza della vegetazione locale (Iacono et al., 2025).
 
-Lo studio presenta alcuni limiti che è opportuno esplicitare. In primo luogo, ciascuna data è rappresentata da una singola acquisizione Sentinel-2 e non da un composito su più immagini: il dato è quindi potenzialmente sensibile a residui di foschia o a condizioni di illuminazione non perfettamente comparabili tra le scene. In secondo luogo, la soglia di NDVI utilizzata per separare vegetazione e suolo nudo (0.27) è stata scelta empiricamente, senza un confronto diretto con dati di verità a terra o con immagini a più alta risoluzione, a differenza di quanto fatto in letteratura con l'uso di rilievi drone o soglie validate su altri indici come il dNBR. Infine, l'analisi qui condotta si concentra sulla sola dicotomia vegetazione/non vegetazione, senza distinguere gradi diversi di severità del danno — distinzione che l'NBR permetterebbe in linea di principio di approfondire ulteriormente.
+Lo studio presenta alcuni limiti che è opportuno esplicitare. In primo luogo, ciascuna data è rappresentata da una singola acquisizione Sentinel-2 e non da un composito 
+su più immagini: il dato è quindi potenzialmente sensibile a residui di foschia o a condizioni di illuminazione non perfettamente comparabili tra le scene. Infine, 
+l'analisi qui condotta si concentra sulla sola dicotomia vegetazione/non vegetazione, senza distinguere gradi diversi di severità del danno — distinzione che l'NBR 
+permetterebbe in linea di principio di approfondire ulteriormente.
 
-Come indicato in apertura, un possibile sviluppo naturale di questo lavoro è l'estensione della serie temporale all'anno successivo (2021), per verificare se il recupero osservato tra agosto 2019 e giugno 2020 sia proseguito, si sia stabilizzato, o abbia subito battute d'arresto nel medio termine — offrendo così un quadro più completo della traiettoria di recupero della vegetazione di Stromboli dopo il parossismo del 2019.
-
-*(Se vuoi aggiungere una tua riflessione personale conclusiva, questo è lo spazio: ______________________________)*
+Come indicato in apertura, un possibile sviluppo naturale di questo lavoro è l'estensione della serie temporale all'anno successivo (2021), per verificare se il recupero
+osservato tra agosto 2019 e giugno 2020 sia proseguito, si sia stabilizzato, o abbia subito battute d'arresto nel medio termine — offrendo così un quadro più completo 
+della traiettoria di recupero della vegetazione di Stromboli dopo il parossismo del 2019.
 
 ## Riferimenti bibliografici
 
