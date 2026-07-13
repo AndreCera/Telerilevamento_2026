@@ -212,7 +212,7 @@ plotRGB(str_giu_20, r=3, g=2, b=1, stretch="lin", main="Giugno 2020 (Recupero)")
 dev.off()
 ```
 
-<img width="480" height="480" alt="true_color_confronto" src="https://github.com/user-attachments/assets/51d0dbb8-9f98-48f1-8746-9506b9eb88a1" />
+<img width="480" height="174" alt="true_color_confronto" src="https://github.com/user-attachments/assets/ce475319-2ea7-4d73-a7d6-66bd93cf9b7b" />
 
 Gli effetti dell'eruzione del 2019 sono apprezzabili anche dall'occhio umano: la perdita delle aree verdi, principalmente macchia mediterranea, è lampante nel settore occidentale dell'isola, mentre il recupero è solo parziale a giugno 2020
 
@@ -224,8 +224,7 @@ plotRGB(str_ago_19, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Agosto 20
 plotRGB(str_giu_20, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Giugno 2020")
 dev.off() # Chiudere il pannello di Visualizzazione delle immagini e ristabilire il formato dei grafici a quello di default
 ```
-
-<img width="480" height="480" alt="false_color_confronto" src="https://github.com/user-attachments/assets/ffea0962-d1d3-4ecd-bbf1-a90a1065412b" />
+<img width="480" height="173" alt="false_color_confronto" src="https://github.com/user-attachments/assets/7474e769-051f-4120-b74c-8a118a54a738" />
 
 Nel falso colore (NIR-Rosso-Verde) la vegetazione sana appare tipicamente in tonalità rosse/rosate: una riduzione di queste tonalità tra giugno e agosto 2019 è il segnale atteso dell'impatto degli incendi.
 
