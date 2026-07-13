@@ -276,7 +276,7 @@ png("immagini progetto stromboli/nbr_impatto_2019.png", width = 14, height = 5, 
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_giu_19, col = rocket(100), main = "NBR Giugno 2019 (Pre)")
 plot(nbr_ago_19, col = rocket(100), main = "NBR Agosto 2019 (Post)")
-plot(dnbr_19, col = turbo(100), main = "Delta NBR (dNBR 2019)")
+plot(dnbr_19, col = colorRampPalette(c("grey", "black"))(100), main = "Delta NBR (dNBR 2019)")
 dev.off()
 
 # Grafico 2: Recupero NBR (Agosto 2019 vs Giugno 2020)
@@ -284,7 +284,7 @@ png("immagini progetto stromboli/nbr_recupero_2020.png", width = 14, height = 5,
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_ago_19, col = rocket(100), main = "NBR Agosto 2019 (Post)")
 plot(nbr_giu_20, col = rocket(100), main = "NBR Giugno 2020 (Recupero)")
-plot(dnbr_20, col = turbo(100), main = "Delta NBR (dNBR 19-20)")
+plot(dnbr_20, col = colorRampPalette(c("grey", "black"))(100), main = "Delta NBR (dNBR 19-20)")
 dev.off()
 
 # Grafico 3: Bilancio Netto Annuale NBR (Giugno 19 vs Giugno 20)
@@ -292,7 +292,7 @@ png("immagini progetto stromboli/nbr_bilancio_annuale.png", width = 14, height =
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_giu_19, col = rocket(100), main = "NBR Giugno 2019 (Pre)")
 plot(nbr_giu_20, col = rocket(100), main = "NBR Giugno 2020 (Recupero)")
-plot(dnbr_netto, col = turbo(100), main = "Delta NBR Netto (Annuale)")
+plot(dnbr_netto, col = colorRampPalette(c("grey", "black"))(100), main = "Delta NBR Netto (Annuale)")
 dev.off()
 
 
