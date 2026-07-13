@@ -171,7 +171,7 @@ dev.off()
 <img width="3600" height="2400" alt="bande_separate_giu19" src="https://github.com/user-attachments/assets/f7ee8a9b-803d-43ca-895b-0127d1a2d8f9" />
 
 Il NIR risulta molto più caratterizzante delle altre bande, segnalando una vegetazione relativamente uniforme nella condizione pre-parossismo eccetto
-che nelle Sciara del Fuoco
+che nella Sciara del Fuoco
 
 ### 5.2 Agosto 2019 (post-parossismo)
 
@@ -205,7 +205,7 @@ dev.off()
 
 L'assorbimento della banda rossa ritorna alle condizioni pre-parossismo ma il NIR ancora non pareggia i livelli di riflettanza dell'anno precedente
 
-### 5.4 Plot RGB: vero colore e falso colore
+### 5.4 Plot RGB: True e False Colors
 
 ```r
 # VISUALIZZAZIONE IN COLORI REALI (True Color - RGB 3,2,1)
@@ -264,6 +264,10 @@ Per ciascuna delle tre date sono stati calcolati gli indici DVI, NDVI e NBR e pe
 
 ### 6.1 DVI (Difference Vegetation Index)
 
+<img width="222" height="103" alt="image" src="https://github.com/user-attachments/assets/1c8b5b35-5cea-483d-a4af-15ee5aacf292" />
+
+Non essendo normalizzato, il DVI va letto soprattutto in termini relativi tra le tre date piuttosto che in valore assoluto.
+
 ```r
 # Calcolo degli indici con una semplice differenza tra bande
 dvi_giu_19 <- str_giu_19[["B8"]] - str_giu_19[["B4"]]
@@ -284,6 +288,10 @@ dev.off()
 ```
 <img width="4200" height="1500" alt="dvi_impatto_2019" src="https://github.com/user-attachments/assets/e13de17f-48a0-4ef3-9660-16e71e8dcd1f" />
 
+Il grafico pre mostra una vegetazione in salute sull'isola di Stromboli, ad esclusione dell'area del Pizzo e della Sciara del Fuoco, soggette a frequenti invasioni da
+colate laviche e da altri prodotti vulcanici. Il post evidenzia una devastazione pressoché totale della vegetazione, che interessa gran parte dell'isola, determinando
+un crollo, in tonalità, del DVI. La differenza, visualizzata in scala di grigi, mostra come anche il settore nord-orientale sia stato colpito, seppur in misura minore.
+
 ```r
 # Grafico 2: Recupero DVI (2019 vs 2020)
 png("immagini progetto stromboli/dvi_recupero_2020.png", width = 14, height = 5, units = "in", res = 300)
@@ -295,6 +303,8 @@ dev.off()
 ```
 
 <img width="4200" height="1500" alt="dvi_recupero_2020" src="https://github.com/user-attachments/assets/776a020e-bd0c-4b84-8647-7bd18fe68f28" />
+
+Giugno 2020 presenta valori di DVI piuttosto alti, sparsi sull'isola, che ricordano per certi versi la condizione pre-parossismo; il delta rivela un incoraggiante recupero su gran parte dell'isola.
 
 ```r
 # Grafico 3: Bilancio Netto Annuale DVI (Giugno vs Giugno)
@@ -308,9 +318,13 @@ dev.off()
 
 <img width="4200" height="1500" alt="dvi_bilancio_annuale" src="https://github.com/user-attachments/assets/63119cf9-627b-4b1d-bf0f-da2e3f01c42f" />
 
-*Non essendo normalizzato, il DVI va letto soprattutto in termini relativi tra le tre date piuttosto che in valore assoluto.* **Completa qui con il commento ai tre grafici DVI:** ______________________________
+Il confronto tra giugno 2019 e giugno 2020 mette in chiaro come il recupero sia solo parziale: la risposta della copertura vegetale non ha ancora bilanciato i danni degli incendi, specialmente nei settori occidentale e sud-occidentale.
 
 ### 6.2 NDVI (Normalized Difference Vegetation Index)
+
+<img width="381" height="131" alt="image" src="https://github.com/user-attachments/assets/2c0e6ff9-eed1-4eb2-b349-d492feda329b" />
+
+In letteratura, Iacono et al. (2025) ottengono elevate differenze di NDVI nel breve periodo, in particolare nei settori Ovest e Sud-Ovest; calcolando il nostro NDVI speriamo di confermare e ampliare, a livello temporale, questo recente monitoraggio vulcanico
 
 ```r
 # INDICE NDVI (Normalized Difference Vegetation Index)
@@ -339,6 +353,8 @@ dev.off()
 
 <img width="4200" height="1500" alt="ndvi_impatto_2019" src="https://github.com/user-attachments/assets/47b7e9b5-5990-4fb8-a4b7-2a6699fa846d" />
 
+Similmente al DVI, l'NDVI mostra una grande differenza tra lo scenario pre e post; a differenza del DVI, tuttavia, viene rappresentata meglio la salute della vegetazione nello scenario pre-eruttivo.
+
 ```r
 # Grafico 2: Recupero NDVI (2019 vs 2020)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
@@ -349,6 +365,8 @@ dev.off()
 ```
 
 <img width="4200" height="1500" alt="ndvi_recupero_2020" src="https://github.com/user-attachments/assets/927b4279-9d7b-4ca2-9aee-02555e5ac220" />
+
+Il recupero di giugno 2020 appare abbastanza omogeneo, con una vegetazione apparentemente in salute nel settore orientale.
 
 ```r
 # Grafico 3: Bilancio Netto Annuale NDVI (Giugno vs Giugno)
@@ -361,9 +379,13 @@ dev.off()
 
 <img width="4200" height="1500" alt="ndvi_bilancio_annuale" src="https://github.com/user-attachments/assets/2f43c407-fa28-4f02-b2de-f7684424f379" />
 
-*In letteratura, l'impatto degli incendi del 2019 su Stromboli è stato descritto come particolarmente marcato nei settori occidentale e sud-occidentale dell'isola (Iacono et al., 2025): è un utile riferimento per verificare se il pattern spaziale del tuo Delta NDVI vada nella stessa direzione.* **Completa qui:** ______________________________
+Il confronto annuale conferma come, specialmente il versante occidentale del vulcano, sia ancora in una condizione di crisi ecologica a un anno di distanza dall'eruzione.
 
 ### 6.3 NBR (Normalized Burn Ratio)
+
+Sull'esempio di Iacono et al. (2025), anche in questo lavoro è stato calcolato l'indice Normalized Burn Ratio, che sfruttando lo SWIR dovrebbe evidenziare in modo più netto le aree effettivamente percorse dal fuoco.
+
+<img width="370" height="116" alt="image" src="https://github.com/user-attachments/assets/33f0496c-d066-4ef6-9e68-50ef55040be7" />
 
 ```r
 # INDICE NBR (Normalized Burn Ratio)
@@ -392,6 +414,9 @@ dev.off()
 
 <img width="4200" height="1500" alt="nbr_impatto_2019" src="https://github.com/user-attachments/assets/5fcb3850-ef08-4558-8e5d-dfea27456075" />
 
+L'indice NBR mostra ancora meglio come, nel giro di poco più di un mese, si passi da uno scenario di vegetazione in salute a una quasi totale assenza di vegetazione nel
+settore meridionale dell'isola, che presenta i segni di un suolo nudo e bruciato.
+
 ```r
 # Grafico 2: Recupero NBR (Agosto 2019 vs Giugno 2020)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
@@ -403,6 +428,8 @@ dev.off()
 
 <img width="4200" height="1500" alt="nbr_recupero_2020" src="https://github.com/user-attachments/assets/497a71c1-e34f-447e-8a48-ad519f5117e7" />
 
+A distanza di un anno si testimonia un diffuso recupero, con ancora tracce di suolo bruciato a giugno 2020.
+
 ```r
 # Grafico 3: Bilancio Netto Annuale NBR (Giugno 19 vs Giugno 20)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
@@ -412,9 +439,9 @@ plot(dnbr_netto, col = colorRampPalette(c("grey", "black"))(100), main = "Delta 
 dev.off()
 ```
 
-<img width="4200" height="1500" alt="ndvi_bilancio_annuale" src="https://github.com/user-attachments/assets/76971750-8d9b-436b-860e-b44dd704fd29" />
+<img width="4200" height="1500" alt="nbr_bilancio_annuale" src="https://github.com/user-attachments/assets/038f665d-8049-426c-ac1f-7e117596848a" />
 
-*Il NBR, sfruttando lo SWIR, dovrebbe evidenziare in modo più netto le aree effettivamente percorse dal fuoco (cenere/suolo esposto) rispetto al NDVI, che risente più in generale dello stato di salute della vegetazione.* **Completa qui:** ______________________________
+Il bilancio annuale è inclemente, evidenziando settori ancora privi di vegetazione in diverse zone dell'isola.
 
 ## 7.1 Classificazione tramite maschera ternaria
 
