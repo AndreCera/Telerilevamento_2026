@@ -268,8 +268,9 @@ Per ciascuna delle tre date sono stati calcolati gli indici DVI, NDVI e NBR e pe
 
 Non essendo normalizzato, il DVI va letto soprattutto in termini relativi tra le tre date piuttosto che in valore assoluto.
 
+Con una semplice differenza tra bande, che selezioniamo con le `[]`, si calcola il primo indice spettrale:
 ```r
-# Calcolo degli indici con una semplice differenza tra bande, che seleziono con le `[]`
+# Calcolo degli indici che salvo come oggetti 
 dvi_giu_19 <- str_giu_19[["B8"]] - str_giu_19[["B4"]]
 dvi_ago_19 <- str_ago_19[["B8"]] - str_ago_19[["B4"]]
 dvi_giu_20 <- str_giu_20[["B8"]] - str_giu_20[["B4"]]
@@ -279,7 +280,7 @@ ddvi_19    <- dvi_giu_19 - dvi_ago_19  # Impatto immediato dell'eruzione
 ddvi_20    <- dvi_ago_19 - dvi_giu_20  # Recupero post-evento
 ddvi_netto <- dvi_giu_19 - dvi_giu_20  # Bilancio del danno netto a un anno
 
-# Grafico 1: Impatto Immediato DVI (2019)
+# Impatto Immediato DVI (2019)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(dvi_giu_19, col = cividis(100), main = "DVI Giugno 2019 (Pre)")
 plot(dvi_ago_19, col = cividis(100), main = "DVI Agosto 2019 (Post)")
@@ -293,8 +294,7 @@ colate laviche e da altri prodotti vulcanici. Il post evidenzia una devastazione
 un crollo, in tonalità, del DVI. La differenza, visualizzata in scala di grigi, mostra come anche il settore nord-orientale sia stato colpito, seppur in misura minore.
 
 ```r
-# Grafico 2: Recupero DVI (2019 vs 2020)
-png("immagini progetto stromboli/dvi_recupero_2020.png", width = 14, height = 5, units = "in", res = 300)
+# Recupero DVI (2019 vs 2020)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(dvi_ago_19, col = cividis(100), main = "DVI Agosto 2019 (Post)")
 plot(dvi_giu_20, col = cividis(100), main = "DVI Giugno 2020 (Recupero)")
@@ -307,8 +307,7 @@ dev.off()
 Giugno 2020 presenta valori di DVI piuttosto alti, sparsi sull'isola, che ricordano per certi versi la condizione pre-parossismo; il delta rivela un incoraggiante recupero su gran parte dell'isola.
 
 ```r
-# Grafico 3: Bilancio Netto Annuale DVI (Giugno vs Giugno)
-png("immagini progetto stromboli/dvi_bilancio_annuale.png", width = 14, height = 5, units = "in", res = 300)
+# Bilancio Netto Annuale DVI (Giugno vs Giugno)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(dvi_giu_19, col = cividis(100), main = "DVI Giugno 2019 (Pre)")
 plot(dvi_giu_20, col = cividis(100), main = "DVI Giugno 2020 (Recupero)")
@@ -343,7 +342,7 @@ dndvi_netto <- ndvi_giu_19 - ndvi_giu_20  # Bilancio del vigore netto a un anno
 ```r
 # VISUALIZZAZIONE E ESPORTAZIONE NDVI
 
-# Grafico 1: Impatto Immediato NDVI (2019)
+# Impatto Immediato NDVI (2019)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_giu_19, col = mako(100), main = "NDVI Giugno 2019 (Pre)")
 plot(ndvi_ago_19, col = mako(100), main = "NDVI Agosto 2019 (Post)")
@@ -356,7 +355,7 @@ dev.off()
 Similmente al DVI, l'NDVI mostra una grande differenza tra lo scenario pre e post; a differenza del DVI, tuttavia, viene rappresentata meglio la salute della vegetazione nello scenario pre-eruttivo.
 
 ```r
-# Grafico 2: Recupero NDVI (2019 vs 2020)
+# Recupero NDVI (2019 vs 2020)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_ago_19, col = mako(100), main = "NDVI Agosto 2019 (Post)")
 plot(ndvi_giu_20, col = mako(100), main = "NDVI Giugno 2020 (Recupero)")
@@ -369,7 +368,7 @@ dev.off()
 Il recupero di giugno 2020 appare abbastanza omogeneo, con una vegetazione apparentemente in salute nel settore orientale.
 
 ```r
-# Grafico 3: Bilancio Netto Annuale NDVI (Giugno vs Giugno)
+# Bilancio Netto Annuale NDVI (Giugno vs Giugno)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(ndvi_giu_19, col = mako(100), main = "NDVI Giugno 2019 (Pre)")
 plot(ndvi_giu_20, col = mako(100), main = "NDVI Giugno 2020 (Recupero)")
@@ -404,7 +403,7 @@ dnbr_netto <- nbr_giu_19 - nbr_giu_20  # Severità del danno permanente a un ann
 ```r
 # VISUALIZZAZIONE E ESPORTAZIONE NBR
 
-# Grafico 1: Impatto Immediato NBR (2019)
+# Impatto Immediato NBR (2019)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_giu_19, col = rocket(100), main = "NBR Giugno 2019 (Pre)")
 plot(nbr_ago_19, col = rocket(100), main = "NBR Agosto 2019 (Post)")
@@ -418,7 +417,7 @@ L'indice NBR mostra ancora meglio come, nel giro di poco più di un mese, si pas
 settore meridionale dell'isola, che presenta i segni di un suolo nudo e bruciato.
 
 ```r
-# Grafico 2: Recupero NBR (Agosto 2019 vs Giugno 2020)
+# Recupero NBR (Agosto 2019 vs Giugno 2020)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_ago_19, col = rocket(100), main = "NBR Agosto 2019 (Post)")
 plot(nbr_giu_20, col = rocket(100), main = "NBR Giugno 2020 (Recupero)")
@@ -431,7 +430,7 @@ dev.off()
 A distanza di un anno si testimonia un diffuso recupero, con ancora tracce di suolo bruciato a giugno 2020.
 
 ```r
-# Grafico 3: Bilancio Netto Annuale NBR (Giugno 19 vs Giugno 20)
+# Bilancio Netto Annuale NBR (Giugno 19 vs Giugno 20)
 par(mfrow = c(1, 3), mar = c(4, 3, 4, 5))
 plot(nbr_giu_19, col = rocket(100), main = "NBR Giugno 2019 (Pre)")
 plot(nbr_giu_20, col = rocket(100), main = "NBR Giugno 2020 (Recupero)")
@@ -445,9 +444,11 @@ Il bilancio annuale è inclemente, evidenziando settori ancora privi di vegetazi
 
 ## 7.1 Classificazione
 
-Per ottenere una stima quantitativa dell'impatto sulla copertura del suolo, è stata costruita, per ciascuna data, una classificazione in tre classi (mare, suolo nudo/cenere, vegetazione) basata su semplici soglie applicate a NDWI e NDVI.
+Per ottenere una stima quantitativa dell'impatto sulla copertura del suolo, è stata costruita, per ciascuna data, una classificazione in tre classi (mare, suolo nudo/
+cenere, vegetazione) basata su semplici soglie applicate a NDWI e NDVI.
 
-Il primo passo è stato calcolare l'NDWI su tutte e tre le date: come indicato in precedenza, il suo utilizzo qui non è finalizzato a una vera e propria caratterizzazione idrologica, ma esclusivamente a isolare i pixel di mare (valori di NDWI positivi) e poterli quindi trattare come a sè stanti nella classificazione:
+Il primo passo è stato calcolare l'NDWI su tutte e tre le date: come indicato in precedenza, il suo utilizzo qui non è finalizzato a una vera e propria caratterizzazione
+idrologica, ma esclusivamente a isolare i pixel di mare (valori di NDWI positivi) e poterli quindi trattare come a sè stanti nella classificazione:
 
 ```r
 # MASCHERE E MAPPE TERNARIE DI COPERTURA CON INDICI NORMALIZZATI 
@@ -458,19 +459,20 @@ ndwi_ago19 <- (str_ago_19[["B3"]] - str_ago_19[["B8"]]) / (str_ago_19[["B3"]] + 
 ndwi_giu20 <- (str_giu_20[["B3"]] - str_giu_20[["B8"]]) / (str_giu_20[["B3"]] + str_giu_20[["B8"]])
 ```
 
-Le tre classi sono state definite secondo la seguente logica: NDWI > 0 identifica il mare (l'acqua presenta valori positivi di NDWI, mentre la terraferma valori negativi); tra i pixel di terraferma, NDVI > 0.27 identifica la vegetazione, mentre i restanti pixel (NDWI ≤ 0 e NDVI ≤ 0.27) sono classificati come suolo nudo o cenere. La soglia di 0.27 sul NDVI è stata individuata empiricamente osservando la distribuzione dei valori sulla terraferma con la funzione `click()` del pacchetto `terra`
+Le tre classi sono state definite secondo la seguente logica: NDWI > 0 identifica il mare (l'acqua presenta valori positivi di NDWI, mentre la terraferma valori 
+negativi); tra i pixel di terraferma, NDVI > 0.27 identifica la vegetazione, mentre i restanti pixel (NDWI ≤ 0 e NDVI ≤ 0.27) sono classificati come suolo nudo o cenere.
+La soglia di 0.27 sul NDVI è stata individuata empiricamente osservando la distribuzione dei valori sulla terraferma con la funzione `click()` del pacchetto `terra`
 
 ```r
-# CONDIZIONI LOGICHE E IDENTIFICAZIONE CLASSI STABILI
-# L'acqua ha valori positivi di NDWI, la terraferma ha valori negativi
+# CONDIZIONI LOGICHE E IDENTIFICAZIONE DELLE CLASSI
 
 # GIUGNO 2019 
-mare_giu19  <- ndwi_giu19 > 0
-veg_giu19   <- ndvi_giu_19 > 0.27
-suolo_giu19 <- ndwi_giu19 <= 0 & ndvi_giu_19 <= 0.27
+mare_giu19  <- ndwi_giu19 > 0                          # L'acqua ha valori positivi di NDWI, la terraferma ha valori negativi
+veg_giu19   <- ndvi_giu_19 > 0.27                      # L'NDVI alto identifica la vegetazione
+suolo_giu19 <- ndwi_giu19 <= 0 & ndvi_giu_19 <= 0.27   # Ciò che non ricade in alcuna delle precedenti, viee classificato come suolo
 
 # AGOSTO 2019 
-mare_ago19  <- ndwi_ago19 > 0
+mare_ago19  <- ndwi_ago19 > 0                          # Si ripete la procedura per le date successive
 veg_ago19   <- ndvi_ago_19 > 0.27
 suolo_ago19 <- ndwi_ago19 <= 0 & ndvi_ago_19 <= 0.27
 
@@ -484,7 +486,7 @@ Le tre classi (codificate 1 = mare, 2 = suolo, 3 = vegetazione) sono state quind
 
 ```r
 # Giugno 2019
-clas_giu19 <- ndvi_giu_19
+clas_giu19 <- ndvi_giu_19     # Creo un nuovo oggetto con la stessa struttura di ndvi_giu_19
 clas_giu19[mare_giu19]  <- 1  # ID 1 = Mare
 clas_giu19[suolo_giu19] <- 2  # ID 2 = Suolo Nudo / Cenere
 clas_giu19[veg_giu19]   <- 3  # ID 3 = Vegetazione
@@ -498,7 +500,7 @@ clas_ago19[veg_ago19]   <- 3
 # Giugno 2020
 clas_giu20 <- ndvi_giu_20
 clas_giu20[mare_giu20]  <- 1
-clas_giu20[suolo_giu20] <- 2
+clas_giu20[suolo_giu20] <- 2 
 clas_giu20[veg_giu20]   <- 3
 ```
 La mappa è stata infine rappresentata con tre colori della palette "cividis"
