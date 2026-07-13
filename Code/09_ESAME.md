@@ -19,6 +19,7 @@ l'impatto immediato dell'evento sulla vegetazione dell'isola e valutarne il recu
  - giugno 2019 (condizione pre-parossismo),
  - agosto 2019 (condizione immediatamente successiva agli incendi)
  - giugno 2020 (a un anno di distanza).
+   
 A tal fine sono stati calcolati e confrontati gli indici DVI, NDVI e NBR, ed è stata condotta una classificazione della copertura del suolo per stimare le
 variazioni percentuali di superficie vegetata.
 
