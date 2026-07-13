@@ -153,45 +153,26 @@ names(str_giu_20) <- c("B2", "B3", "B4", "B8", "B12")
 
 Prima di procedere al calcolo degli indici, le bande sono state visualizzate singolarmente e in composizione RGB (vero colore e falso colore), sia come controllo qualitativo sui dati sia per evidenziare in modo diretto le differenze tra le tre date.
 
-### 5.1 Bande singole — Giugno 2019 (pre-parossismo)
+### 5.1 Giugno 2019 (pre-parossismo)
 
 ```r
-# ViSUALIZZAZIONE E ESPORTAZIONE DELLE BANDE
-png("immagini progetto stromboli/bande_str_giu_19.png", width = 12, height = 8, units = "in", res = 300)
-plot(str_giu_19, col=plasma(100))
-dev.off()
-```
-
-**[INSERISCI QUI: `bande_str_giu_19.png`]**
-
-```r
-png("immagini progetto stromboli/bande_separate_giu19.png", width = 12, height = 8, units = "in", res = 300)
 par(mfrow = c(2, 3), mar = c(4, 3, 4, 5))
 plot(str_giu_19[["B2"]], col = plasma(100), main = "Blu (B2)")
 plot(str_giu_19[["B3"]], col = plasma(100), main = "Verde (B3)")
 plot(str_giu_19[["B4"]], col = plasma(100), main = "Rosso (B4)")
 plot(str_giu_19[["B8"]], col = plasma(100), main = "NIR (B8)")
 plot(str_giu_19[["B12"]], col = plasma(100), main = "SWIR (B12)")
-dev.off()
+dev.off()                                                               
 ```
 
-**[INSERISCI QUI: `bande_separate_giu19.png`]**
+<img width="3600" height="2400" alt="bande_separate_giu19" src="https://github.com/user-attachments/assets/f7ee8a9b-803d-43ca-895b-0127d1a2d8f9" />
 
-*Nelle singole bande pre-parossismo la vegetazione dovrebbe risultare riconoscibile soprattutto dal contrasto tra Rosso e NIR.* **Completa qui con le osservazioni specifiche sulle tue immagini:** ______________________________
+Il NIR risulta molto più caratterizzante delle altre bande, segnalando una vegetazione relativamente uniforme nella condizione pre-parossismo eccetto
+che nelle Sciara del Fuoco
 
-### 5.2 Bande singole — Agosto 2019 (post-parossismo)
-
-```r
-# AGO - 19
-png("immagini progetto stromboli/bande_str_ago_19.png", width = 12, height = 8, units = "in", res = 300)
-plot(str_ago_19, col=plasma(100))
-dev.off()
-```
-
-**[INSERISCI QUI: `bande_str_ago_19.png`]**
+### 5.2 Agosto 2019 (post-parossismo)
 
 ```r
-png("immagini progetto stromboli/bande_separate_ago19.png", width = 12, height = 8, units = "in", res = 300)
 par(mfrow = c(2, 3), mar = c(4, 3, 4, 5))
 plot(str_ago_19[["B2"]], col = plasma(100), main = "Blu (B2)")
 plot(str_ago_19[["B3"]], col = plasma(100), main = "Verde (B3)")
@@ -201,23 +182,13 @@ plot(str_ago_19[["B12"]], col = plasma(100), main = "SWIR (B12)")
 dev.off()
 ```
 
-**[INSERISCI QUI: `bande_separate_ago19.png`]**
+<img width="3600" height="2400" alt="bande_separate_ago19" src="https://github.com/user-attachments/assets/04e1a88b-811c-46be-904b-602fba5ef64b" />
 
-*A seguito degli incendi ci si attende un aumento di riflettanza nel Rosso e nello SWIR nelle aree bruciate, e una riduzione nel NIR rispetto a giugno.* **Completa qui:** ______________________________
+Diminuisce la riflettanza nel NIR in seguito agli incendi che hanno devastato la vegetazione mentre amumenta quella nel rosso
 
-### 5.3 Bande singole — Giugno 2020 (recupero)
-
-```r
-# GIU - 20
-png("immagini progetto stromboli/bande_str_giu_20.png", width = 12, height = 8, units = "in", res = 300)
-plot(str_giu_20, col=plasma(100))
-dev.off()
-```
-
-**[INSERISCI QUI: `bande_str_giu_20.png`]**
+### 5.3 Giugno 2020 (recupero)
 
 ```r
-png("immagini progetto stromboli/bande_separate_giu20.png", width = 12, height = 8, units = "in", res = 300)
 par(mfrow = c(2, 3), mar = c(4, 3, 4, 5))
 plot(str_giu_20[["B2"]], col = plasma(100), main = "Blu (B2)")
 plot(str_giu_20[["B3"]], col = plasma(100), main = "Verde (B3)")
@@ -227,15 +198,14 @@ plot(str_giu_20[["B12"]], col = plasma(100), main = "SWIR (B12)")
 dev.off()
 ```
 
-**[INSERISCI QUI: `bande_separate_giu20.png`]**
+<img width="3600" height="2400" alt="bande_separate_giu20" src="https://github.com/user-attachments/assets/f98e1606-a8b4-4c00-86b3-74b694c81d52" />
 
-*A un anno di distanza ci si attende un parziale ritorno verso i valori pre-parossismo, senza necessariamente un recupero completo.* **Completa qui:** ______________________________
+L'assorbimento della banda rossa ritorna alle condizioni pre-parossismo ma il NIR ancora non pareggia i livelli di riflettanza dell'anno precedente
 
 ### 5.4 Composizioni RGB: vero colore e falso colore
 
 ```r
 # VISUALIZZAZIONE IN COLORI REALI (True Color - RGB 3,2,1)
-png("immagini progetto stromboli/true_color_confronto.png")
 par(mfrow = c(1, 3), mar = c(3, 3, 4, 2))  # rendo l'immagine multiframe e sistemo i margini per ottimizzare la visualizzazione
 plotRGB(str_giu_19, r=3, g=2, b=1, stretch="lin", main="Giugno 2019 (Pre)")
 plotRGB(str_ago_19, r=3, g=2, b=1, stretch="lin", main="Agosto 2019 (Post)")
@@ -243,11 +213,12 @@ plotRGB(str_giu_20, r=3, g=2, b=1, stretch="lin", main="Giugno 2020 (Recupero)")
 dev.off()
 ```
 
-**[INSERISCI QUI: `true_color_confronto.png`]**
+<img width="480" height="480" alt="true_color_confronto" src="https://github.com/user-attachments/assets/51d0dbb8-9f98-48f1-8746-9506b9eb88a1" />
+
+Gli effetti dell'eruzione del 2019 sono apprezzabili anche dall'occhio umano: la perdita delle aree verdi, principalmente macchia mediterranea, è lampante nel settore occidentale dell'isola, mentre il recupero è solo parziale a giugno 2020
 
 ```r
-# VISUALIZZAZIONE E ESPORTAZIONE IN FALSI COLORI (RGB 4,3,2)
-png("immagini progetto stromboli/false_color_confronto.png")
+# VISUALIZZAZIONE IN FALSI COLORI (RGB 4,3,2)
 par(mfrow = c(1, 3), mar = c(3, 3, 4, 2))
 plotRGB(str_giu_19, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Giugno 2019")
 plotRGB(str_ago_19, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Agosto 2019")
@@ -255,11 +226,13 @@ plotRGB(str_giu_20, r=4, g=3, b=2, stretch="lin", main="Falsi Colori - Giugno 20
 dev.off() # Chiudere il pannello di Visualizzazione delle immagini e ristabilire il formato dei grafici a quello di default
 ```
 
-**[INSERISCI QUI: `false_color_confronto.png`]**
+<img width="480" height="480" alt="false_color_confronto" src="https://github.com/user-attachments/assets/ffea0962-d1d3-4ecd-bbf1-a90a1065412b" />
 
-*Nel falso colore (NIR-Rosso-Verde) la vegetazione sana appare tipicamente in tonalità rosse/rosate; una riduzione di queste tonalità tra giugno e agosto 2019 è il segnale atteso dell'impatto degli incendi.* **Completa qui:** ______________________________
+Nel falso colore (NIR-Rosso-Verde) la vegetazione sana appare tipicamente in tonalità rosse/rosate: una riduzione di queste tonalità tra giugno e agosto 2019 è il segnale atteso dell'impatto degli incendi.
 
-### 5.5 Confronto diretto delle bande pre/post parossismo
+### 5.5 Confronto diretto delle bande RGB + NIR
+
+Per osservare con maggior dettaglio gli effetti immediati dell'eruzione, andiamo a plottare un confronto banda a banda fra giugno e agosto 2019
 
 ```r
 png("immagini progetto stromboli/confronto_bande_19_pre_post.png", width = 16, height = 8, units = "in", res = 300)
@@ -278,9 +251,10 @@ plot(str_ago_19[["B8"]], col = inferno(100), main = "Post - NIR (B8)")
 dev.off()
 ```
 
-**[INSERISCI QUI: `confronto_bande_19_pre_post.png`]**
+<img width="4800" height="2400" alt="confronto_bande_19_pre_post" src="https://github.com/user-attachments/assets/ea0481d3-24e6-4cd2-9111-b85e36384f05" />
 
-*Il confronto diretto per banda dovrebbe rendere più immediato individuare in quali bande (tipicamente B4 e B8) la differenza pre/post è più marcata.* **Completa qui:** ______________________________
+Questa immagine mostra come la maggior differenza non si ha nelle bande del visibile, le quali sono in entrambi i casi caratterizzate da un assorbimento 
+elevato, ma dalla riflettanza del NIR, la quale subisce un crollo causato dalla devastazione della vegetazione
 
 ## 6. Calcolo degli indici spettrali di vegetazione
 
