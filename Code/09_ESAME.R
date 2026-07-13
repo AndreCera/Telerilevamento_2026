@@ -8,8 +8,7 @@
 # Devo ritagliare le immagini e creare uno stack manualmente
 
 library(terra)      # Per lavorare con raster e immagini satellitari
-library(imageRy)    # Funzioni di visualizzazione rapide
-library(viridis)    # Palette di colori
+library(viridis)    # 8 color scales adatte anche a utenti con daltonismo
 library(ggplot2)    # Pacchetto per la creazione di grafici
 library(reshape2)   # Riorganizzazioni dei dati tabellari
 
