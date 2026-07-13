@@ -580,8 +580,8 @@ I valori risultanti sono riassunti nella tabella seguente:
 | Non vegetazione | 64,21 % | 91,93 % | 74,82 % |
 | Vegetazione | 35,79 % | 8,07 % | 25,18 % |
 
-I dati mostrano una riduzione della superficie vegetata da quasi un 36% a 8% tra giugno e agosto 2019 (una perdita relativa di circa il 77% della vegetazione
-presente), seguita da un recupero parziale al 25% entro giugno 2020 — un valore ancora sensibilmente inferiore a quello precedente agli incendi.
+I dati mostrano una riduzione della superficie vegetata da quasi un 36% ad appena un 8% tra giugno e agosto 2019 (una perdita relativa di circa il 77% della vegetazione
+presente), seguita da un recupero parziale al 25% entro giugno 2020, un valore ancora sensibilmente inferiore a quello precedente agli incendi.
 
 Tramite alla funzione `melt()` di `reshape2` e alla funzione `ggplot()` di `ggplot2`
 
@@ -603,7 +603,7 @@ grafico_copertura <- ggplot(df_long, aes(x = Classe, y = Percentuale, fill = Per
 <img width="3000" height="1800" alt="grafico_barre_confronto" src="https://github.com/user-attachments/assets/90fbbe31-c4c3-4ae1-8f03-a1f3e629dbe2" />
 
 Infine, per confrontare in modo più diretto la distribuzione dei valori di NDVI sulla terraferma nelle tre date, è stato prodotto un ridgeline plot. Un primo 
-tentativo, condotto sull'intero stack (comprensivo dei pixel di mare), ha prodotto distribuzioni eccessivamente appuntite a causa della grande quantità di 
+tentativo, condotto sull'intero stack (comprensivo dei pixel di mare), ha riportato distribuzioni eccessivamente appuntite a causa della grande quantità di 
 pixel d'acqua concentrati intorno allo stesso valore di NDVI: mascherando lo stack per escludere i pixel di mare (NDWI > 0), le distribuzioni risultano molto 
 più leggibili e interpretabili:
 
