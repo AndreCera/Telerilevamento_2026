@@ -406,7 +406,7 @@ grafico_copertura <- ggplot(df_long, aes(x = Classe, y = Percentuale, fill = Per
 # ESPORTAZIONE E SALVATAGGIO DEL GRAFICO IN ALTA RISOLUZIONE
 ggsave("immagini progetto stromboli/grafico_barre_confronto.png", plot = grafico_copertura, width = 10, height = 6, dpi = 300)
 
-PRODUZIONE DI UN RIDGELINE PLOT
+#PRODUZIONE DI UN RIDGELINE PLOT
 # Creazione dello stack dei layer NDVI e assegnazione dei relativi nomi
 ndvi_stack <- c(ndvi_giu_19, ndvi_ago_19, ndvi_giu_20)
 names(ndvi_stack) <- c("NDVI_Giu19_Pre", "NDVI_Ago19_Post", "NDVI_Giu20_Recupero")
