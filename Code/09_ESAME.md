@@ -549,11 +549,15 @@ I valori risultanti sono riassunti nella tabella seguente:
 | Non vegetazione | 64,21 % | 91,93 % | 74,82 % |
 | Vegetazione | 35,79 % | 8,07 % | 25,18 % |
 
-I dati mostrano una riduzione della superficie vegetata dal 35,79% al 8,07% tra giugno e agosto 2019 (una perdita relativa di circa il 77% della vegetazione presente), seguita da un recupero parziale al 25,18% entro giugno 2020 — un valore ancora sensibilmente inferiore a quello pre-parossismo.
+I dati mostrano una riduzione della superficie vegetata da quasi un 36% a 8% tra giugno e agosto 2019 (una perdita relativa di circa il 77% della vegetazione
+presente), seguita da un recupero parziale al 25% entro giugno 2020 — un valore ancora sensibilmente inferiore a quello precedente agli incendi.
+
+Tramite alla funzione melt di reshape2 e alla funzione ggplot() di ggplot2
 
 ```r
 # CONVERSIONE DELLA TABELLA PER GGPLOT2
-df_long <- melt(tabella_stromboli, id.vars = "Classe", variable.name = "Periodo", value.name = "Percentuale")
+# La funzione melt() del pacchetto reshape2 trasforma un dataframe dal formato largo al formato lungo
+df_long <- melt(tabella_stromboli, id.vars = "Classe", variable.name = "Periodo", value.name = "Percentuale")  
 
 # COSTRUZIONE DEL GRAFICO COMPARATIVO CON GGPLOT2
 grafico_copertura <- ggplot(df_long, aes(x = Classe, y = Percentuale, fill = Periodo)) +                                               
@@ -563,43 +567,31 @@ grafico_copertura <- ggplot(df_long, aes(x = Classe, y = Percentuale, fill = Per
   ylim(0, 100) +
   labs(title = "Evoluzione della copertura del suolo a Stromboli (NDVI > 0.27)", y = "Percentuale (%)", x = "Classe di Copertura") +
   theme_minimal()
-
-# ESPORTAZIONE E SALVATAGGIO DEL GRAFICO IN ALTA RISOLUZIONE
-ggsave("immagini progetto stromboli/grafico_barre_confronto.png", plot = grafico_copertura, width = 10, height = 6, dpi = 300)
 ```
 
-**[INSERISCI QUI: `grafico_barre_confronto.png`]**
+<img width="3000" height="1800" alt="grafico_barre_confronto" src="https://github.com/user-attachments/assets/90fbbe31-c4c3-4ae1-8f03-a1f3e629dbe2" />
 
-Infine, per confrontare in modo più diretto la distribuzione dei valori di NDVI sulla terraferma nelle tre date, è stato prodotto un ridgeline plot. Un primo tentativo, condotto sull'intero stack (comprensivo dei pixel di mare), ha prodotto distribuzioni eccessivamente appuntite a causa della grande quantità di pixel d'acqua concentrati intorno allo stesso valore di NDVI:
-
-```r
-# Creazione dello stack dei layer NDVI e assegnazione dei relativi nomi
-ndvi_stack <- c(ndvi_giu_19, ndvi_ago_19, ndvi_giu_20)
-names(ndvi_stack) <- c("NDVI_Giu19_Pre", "NDVI_Ago19_Post", "NDVI_Giu20_Recupero")
-
-# Generazione del ridgeline plot per il confronto delle distribuzioni c
-im.ridgeline(ndvi_stack, scale=1, palette="mako")    # escono delle curve molto appuntite a causa della presenza di molti pixel d'H2O
-```
-
-Mascherando lo stack per escludere i pixel di mare (NDWI > 0), le distribuzioni risultano molto più leggibili e interpretabili:
+Infine, per confrontare in modo più diretto la distribuzione dei valori di NDVI sulla terraferma nelle tre date, è stato prodotto un ridgeline plot. Un primo 
+tentativo, condotto sull'intero stack (comprensivo dei pixel di mare), ha prodotto distribuzioni eccessivamente appuntite a causa della grande quantità di 
+pixel d'acqua concentrati intorno allo stesso valore di NDVI: mascherando lo stack per escludere i pixel di mare (NDWI > 0), le distribuzioni risultano molto 
+più leggibili e interpretabili:
 
 ```r
 # PRODUZIONE DI UN RIDGELINE PLOT
-# (nota: ho aggiunto il cancelletto iniziale mancante in questa riga di intestazione, presumibilmente perso in fase di copia-incolla, per mantenerla un commento R valido)
 
 # Mascheriamo lo stack escludendo i pixel di mare (NDWI > 0) per ripulire le distribuzioni
 ndvi_stack_isola <- ndvi_stack
 ndvi_stack_isola[ndwi_giu19 > 0] <- NA
 
 # Generazione del ridgeline plot pulito sulla sola terraferma
-png("immagini progetto stromboli/grafico_ridgeline_ndvi.png", width = 10, height = 7, units = "in", res = 300)
 im.ridgeline(ndvi_stack_isola, scale=1, palette="inferno")
 dev.off()
 ```
 
-**[INSERISCI QUI: `grafico_ridgeline_ndvi.png`]**
+<img width="3000" height="2100" alt="grafico_ridgeline_ndvi" src="https://github.com/user-attachments/assets/5d66dd50-a0bf-4779-b171-3e567147b336" />
 
-*Ci si attende che la distribuzione di agosto 2019 sia spostata verso valori di NDVI più bassi rispetto a giugno 2019, e che quella di giugno 2020 si collochi in una posizione intermedia, coerentemente con un recupero solo parziale.* **Completa qui con il commento al ridgeline plot:** ______________________________
+La distribuzione dei pixel di agosto 2019 è spostata verso valori di NDVI più bassi rispetto a giugno 2019, quella di giugno 2020 si colloca in una posizione
+in qualche modo intermedia, coerentemente con un recupero solo parziale.
 
 ## Conclusioni
 
