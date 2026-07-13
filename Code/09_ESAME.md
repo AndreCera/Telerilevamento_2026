@@ -1,4 +1,5 @@
-# Analisi Temporale Pre e Post Eruzione sull'Isola di Stromboli
+# Monitoraggio temporale degli effetti delle eruzioni vulcaniche sull'Isola di Stromboli
+MONITORAGGIO TEMPORALE DEGLI EFFETTI
 
 ## 1. Introduzione
 
@@ -9,10 +10,12 @@ questa disciplina allo studio delle calamità naturali e, in particolare, alla r
 
 Il presente lavoro si inserisce in questo ambito e ha per oggetto l'isola di Stromboli (Isole Eolie), colpita il 3 luglio 2019 da un violento parossismo che ha
 innescato numerosi incendi sui fianchi del vulcano. L'obiettivo di questo progetto è quantificare, attraverso indici spettrali derivati da immagini Sentinel-2, 
-l'impatto immediato dell'evento sulla vegetazione dell'isola e valutarne il recupero nel medio termine, confrontando tre acquisizioni: giugno 2019 (condizione
-pre-parossismo), agosto 2019 (condizione immediatamente successiva agli incendi) e giugno 2020 (a un anno di distanza, come verifica del recupero). A tal fine 
-sono stati calcolati e confrontati gli indici DVI, NDVI e NBR, ed è stata condotta una classificazione della copertura del suolo per stimare le variazioni 
-percentuali di superficie vegetata.
+l'impatto immediato dell'evento sulla vegetazione dell'isola e valutarne il recupero nel medio termine, confrontando tre acquisizioni: 
+ - giugno 2019 (condizione pre-parossismo),
+ - agosto 2019 (condizione immediatamente successiva agli incendi)
+ - giugno 2020 (a un anno di distanza).
+A tal fine sono stati calcolati e confrontati gli indici DVI, NDVI e NBR, ed è stata condotta una classificazione della copertura del suolo per stimare le
+variazioni percentuali di superficie vegetata.
 
 ## 2. Inquadramento geologico e il caso studio del 2019
 
@@ -71,8 +74,6 @@ Gli indici spettrali calcolati e confrontati sono i seguenti:
 Per ciascuna delle tre date (giugno 2019, agosto 2019, giugno 2020) sono state caricate le bande a 10 m di risoluzione (B2 - Blu, B3 - Verde, B4 - Rosso, B8 - NIR) e la banda B12 (SWIR) a 20 m di risoluzione:
 
 ```r
-# IMPOSTAZIONE WORKSPACE E CARICAMENTO BANDE A 10 METRI (E 20 METRI PER B12)
-
 # Configurazione della cartella principale di lavoro (Working Directory)
 setwd("C:/Users/User/Desktop/telerilevamento in R/progetto esame Stromboli")
 
@@ -83,24 +84,8 @@ b4_giu19 <- rast("S2A_MSIL2A_20190607T095031_N0500_R079_T33SWC_20221219T154232.S
 b8_giu19 <- rast("S2A_MSIL2A_20190607T095031_N0500_R079_T33SWC_20221219T154232.SAFE/GRANULE/L2A_T33SWC_A020668_20190607T095825/IMG_DATA/R10m/T33SWC_20190607T095031_B08_10m.jp2")
 # Caricamento della Banda 12 (SWIR) a 20 metri per Giugno 2019
 b12_giu19 <- rast("S2A_MSIL2A_20190607T095031_N0500_R079_T33SWC_20221219T154232.SAFE/GRANULE/L2A_T33SWC_A020668_20190607T095825/IMG_DATA/R20m/T33SWC_20190607T095031_B12_20m.jp2")
-
-# AGOSTO - POST
-b2_ago19 <- rast("S2B_MSIL2A_20190811T095039_N0500_R079_T33SWC_20230505T051258.SAFE/GRANULE/L2A_T33SWC_A012689_20190811T095702/IMG_DATA/R10m/T33SWC_20190811T095039_B02_10m.jp2")
-b3_ago19 <- rast("S2B_MSIL2A_20190811T095039_N0500_R079_T33SWC_20230505T051258.SAFE/GRANULE/L2A_T33SWC_A012689_20190811T095702/IMG_DATA/R10m/T33SWC_20190811T095039_B03_10m.jp2")
-b4_ago19 <- rast("S2B_MSIL2A_20190811T095039_N0500_R079_T33SWC_20230505T051258.SAFE/GRANULE/L2A_T33SWC_A012689_20190811T095702/IMG_DATA/R10m/T33SWC_20190811T095039_B04_10m.jp2")
-b8_ago19 <- rast("S2B_MSIL2A_20190811T095039_N0500_R079_T33SWC_20230505T051258.SAFE/GRANULE/L2A_T33SWC_A012689_20190811T095702/IMG_DATA/R10m/T33SWC_20190811T095039_B08_10m.jp2")
-# Caricamento della Banda 12 (SWIR) a 20 metri per Agosto 2019
-b12_ago19 <- rast("S2B_MSIL2A_20190811T095039_N0500_R079_T33SWC_20230505T051258.SAFE/GRANULE/L2A_T33SWC_A012689_20190811T095702/IMG_DATA/R20m/T33SWC_20190811T095039_B12_20m.jp2")
-
-# GIUGNO 2020 - RECUPERO (?)
-b2_giu20 <- rast("S2B_MSIL2A_20200626T095029_N0500_R079_T33SWD_20231109T220700.SAFE/GRANULE/L2A_T33SWD_A017265_20200626T095032/IMG_DATA/R10m/T33SWD_20200626T095029_B02_10m.jp2")
-b3_giu20 <- rast("S2B_MSIL2A_20200626T095029_N0500_R079_T33SWD_20231109T220700.SAFE/GRANULE/L2A_T33SWD_A017265_20200626T095032/IMG_DATA/R10m/T33SWD_20200626T095029_B03_10m.jp2")
-b4_giu20 <- rast("S2B_MSIL2A_20200626T095029_N0500_R079_T33SWD_20231109T220700.SAFE/GRANULE/L2A_T33SWD_A017265_20200626T095032/IMG_DATA/R10m/T33SWD_20200626T095029_B04_10m.jp2")
-b8_giu20 <- rast("S2B_MSIL2A_20200626T095029_N0500_R079_T33SWD_20231109T220700.SAFE/GRANULE/L2A_T33SWD_A017265_20200626T095032/IMG_DATA/R10m/T33SWD_20200626T095029_B08_10m.jp2")
-# Caricamento della Banda 12 (SWIR) a 20 metri per Giugno 2020
-b12_giu20 <- rast("S2B_MSIL2A_20200626T095029_N0500_R079_T33SWD_20231109T220700.SAFE/GRANULE/L2A_T33SWD_A017265_20200626T095032/IMG_DATA/R20m/T33SWD_20200626T095029_B12_20m.jp2")
 ```
-
+La stessa procedura è stata eseguita per importare le bande di agosto 2019 e giugno 2020
 Prima di procedere, è stata verificata la coerenza spaziale (sistema di riferimento ed estensione) tra le tre acquisizioni, condizione necessaria per un confronto multitemporale corretto:
 
 ```r
@@ -122,7 +107,8 @@ ext(b2_giu20)
 # SpatExtent : 499980, 609780, 4190220, 4300020 (xmin, xmax, ymin, ymax)
 ```
 
-Confermata la coerenza spaziale, è stata definita un'estensione ridotta intorno all'isola per il ritaglio (crop) di tutte le bande; la banda B12, nativa a 20 m, è stata inoltre ricampionata con metodo bilineare sulla griglia a 10 m delle altre bande, in modo da ottenere stack multibanda omogenei:
+Confermata la coerenza spaziale, è stata definita un'estensione ridotta intorno all'isola per il ritaglio (crop) di tutte le bande; la banda B12, nativa a 20 
+m, è stata inoltre ricampionata con metodo bilineare sulla griglia a 10 m delle altre bande, in modo da ottenere stack multibanda omogenei:
 
 ```r
 # DEFINIZIONE ESTENSIONE E RITAGLIO (CROP)
@@ -137,24 +123,8 @@ b4_giu19_crop <- crop(b4_giu19, estensione_stromboli)
 b8_giu19_crop <- crop(b8_giu19, estensione_stromboli)
 # Ritaglio e ricampionamento della Banda 12 sulla griglia a 10m (B2) per Giugno 2019
 b12_giu19_crop <- resample(crop(b12_giu19, estensione_stromboli), b2_giu19_crop, method="bilinear")
-
-# RITAGLIO (CROP) DI TUTTE LE BANDE DI AGOSTO 2019
-b2_ago19_crop <- crop(b2_ago19, estensione_stromboli)
-b3_ago19_crop <- crop(b3_ago19, estensione_stromboli)
-b4_ago19_crop <- crop(b4_ago19, estensione_stromboli)
-b8_ago19_crop <- crop(b8_ago19, estensione_stromboli)
-# Ritaglio e ricampionamento della Banda 12 sulla griglia a 10m (B2) per Agosto 2019
-b12_ago19_crop <- resample(crop(b12_ago19, estensione_stromboli), b2_ago19_crop, method="bilinear")
-
-# RITAGLIO (CROP) DI TUTTE LE BANDE DI GIUGNO 2020
-b2_giu20_crop <- crop(b2_giu20, estensione_stromboli)
-b3_giu20_crop <- crop(b3_giu20, estensione_stromboli)
-b4_giu20_crop <- crop(b4_giu20, estensione_stromboli)
-b8_giu20_crop <- crop(b8_giu20, estensione_stromboli)
-# Ritaglio e ricampionamento della Banda 12 sulla griglia a 10m (B2) per Giugno 2020
-b12_giu20_crop <- resample(crop(b12_giu20, estensione_stromboli), b2_giu20_crop, method="bilinear")
 ```
-
+Anche in questo caso, lo stesso procedimento è stato ultimato per le altre due date.
 Infine, le bande ritagliate sono state unite in tre stack multibanda (uno per data), con i livelli rinominati per rendere il codice successivo più leggibile:
 
 ```r
