@@ -2,6 +2,7 @@
 <div align="center">
 
  ## 🇮🇲 IL CASO STUDIO DELL'ISOLA DI STROMBOLI 🍋
+</div>
 
 ## 1. Introduzione
 
