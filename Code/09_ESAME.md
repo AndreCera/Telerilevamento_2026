@@ -61,7 +61,7 @@ L'elaborazione dei dati è stata condotta interamente in ambiente R, utilizzando
 library(terra)      # Pacchetto principale per lavorare con raster e immagini satellitari
 library(viridis)    # 8 color scales adatte anche a utenti con daltonismo
 library(ggplot2)    # Per la creazione di grafici
-library(reshape2)   # Riorganizzare i dati nei dataframes
+library(patchwork)  # Unione di grafici indipendenti usando l'operatore "+"
 library(imageRy)    # Pacchetto didattico e utile per svolgere alcuni tasks con un'unica funzione
 ```
 
@@ -584,7 +584,7 @@ I valori risultanti sono riassunti nella tabella seguente:
 | Non vegetazione | 64,21 % | 91,93 % | 74,82 % |
 | Vegetazione | 35,79 % | 8,07 % | 25,18 % |
 
-I dati mostrano una riduzione della superficie vegetata da quasi un 36% ad appena un 8% tra giugno e agosto 2019 (una perdita relativa di circa il 77% della vegetazione
+>I dati mostrano una riduzione della superficie vegetata da quasi un 36% ad appena un 8% tra giugno e agosto 2019 (una perdita relativa di circa il 77% della vegetazione
 presente), seguita da un recupero parziale al 25% entro giugno 2020, un valore ancora sensibilmente inferiore a quello precedente agli incendi.
 
 Tramite alla funzione `melt()` di `reshape2` e alla funzione `ggplot()` di `ggplot2`
@@ -604,7 +604,7 @@ grafico_copertura <- ggplot(df_long, aes(x = Classe, y = Percentuale, fill = Per
   theme_minimal()
 ```
 
-<img width="3000" height="1800" alt="grafico_barre_confronto" src="https://github.com/user-attachments/assets/90fbbe31-c4c3-4ae1-8f03-a1f3e629dbe2" />
+<img width="3000" height="1800" alt="grafico_barre_confronto" src="https://github.com/user-attachments/assets/7bffb99a-81d7-4066-b238-89d790600cf6" />
 
 Infine, per confrontare in modo più diretto la distribuzione dei valori di NDVI sulla terraferma nelle tre date, è stato prodotto un ridgeline plot. Un primo 
 tentativo, condotto sull'intero stack (comprensivo dei pixel di mare), ha riportato distribuzioni eccessivamente appuntite a causa della grande quantità di 
