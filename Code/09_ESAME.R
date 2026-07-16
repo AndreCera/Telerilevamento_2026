@@ -11,6 +11,7 @@ library(terra)      # Per lavorare con raster e immagini satellitari
 library(viridis)    # 8 color scales adatte anche a utenti con daltonismo
 library(ggplot2)    # Pacchetto per la creazione di grafici
 library(reshape2)   # Riorganizzazioni dei dati tabellari
+library(imageRy)    # Pacchetto didattico e utile per svolgere alcuni tasks con un'unica funzione
 
 # IMPOSTAZIONE WORKSPACE E CARICAMENTO BANDE A 10 METRI (E 20 METRI PER B12)
 
