@@ -7,10 +7,10 @@
 
 # Devo ritagliare le immagini e creare uno stack manualmente
 
-library(terra)      # Per lavorare con raster e immagini satellitari
+library(terra)      # Pacchetto principale per lavorare con raster e immagini satellitari
 library(viridis)    # 8 color scales adatte anche a utenti con daltonismo
-library(ggplot2)    # Pacchetto per la creazione di grafici
-library(reshape2)   # Riorganizzazioni dei dati tabellari
+library(ggplot2)    # Per la creazione di grafici
+library(patchwork)  # Unione di grafici indipendenti usando l'operatore "+"
 library(imageRy)    # Pacchetto didattico e utile per svolgere alcuni tasks con un'unica funzione
 
 # IMPOSTAZIONE WORKSPACE E CARICAMENTO BANDE A 10 METRI (E 20 METRI PER B12)
@@ -378,53 +378,141 @@ perc_veg_ago19   <- freq_ago19$count[3] * 100 / isola_ago19           # 8.070809
 perc_suolo_giu20 <- freq_giu20$count[2] * 100 / isola_giu20           # 74.82413
 perc_veg_giu20   <- freq_giu20$count[3] * 100 / isola_giu20           # 25.17587
 
-tabella_stromboli <- data.frame(
-  Classe = c("Non vegetazione", "Vegetazione"),
-  Pre_parossismo = round(c(perc_suolo_giu19, perc_veg_giu19), 2),
-  Post_parossismo = round(c(perc_suolo_ago19, perc_veg_ago19), 2),
-  Recupero_2020 = round(c(perc_suolo_giu20, perc_veg_giu20), 2)
-)
-#    Classe              Pre_parossismo    Post_parossismo   Recupero_2020
-#    Non vegetazione          64.21          91.93            74.82
-#    Vegetazione              35.79          8.07             25.18
 
-# ESPORTAZIONE DELLA TABELLA DATI IN FORMATO CSV
+# REALIZZAZIONE DI UN GRAFICO COMPARATIVO CON GGPLOT()
+
+# Creiamo piccoli dataframe separati per ciascuna data
+df_giu19 <- data.frame(
+  Classe = c("Non vegetazione", "Vegetazione"),
+  Percentuale = c(perc_suolo_giu19, perc_veg_giu19))
+
+df_ago19 <- data.frame(
+  Classe = c("Non vegetazione", "Vegetazione"),
+  Percentuale = c(perc_suolo_ago19, perc_veg_ago19))
+
+df_giu20 <- data.frame(
+  Classe = c("Non vegetazione", "Vegetazione"),
+  Percentuale = c(perc_suolo_giu20, perc_veg_giu20))
+
+# REALIZZAZIONE ed ESPORTAZIONE DELLA TABELLA delle PERCENTUALI in formato CSV
+tabella_stromboli <- cbind(
+  Classe = df_giu19$Classe,
+  Pre_parossismo = df_giu19$Percentuale,
+  Post_parossismo = df_ago19$Percentuale,
+  Recupero = df_giu20$Percentuale)
+
+#    Classe             Pre_parossismo      Post_parossismo     Recupero          
+#    Non vegetazione          64.21             91.93             74.82
+#    Vegetazione              35.79              8.07             25.18
+
 write.csv(tabella_stromboli, "immagini progetto stromboli/tabella_frequenze_copertura.csv", row.names = FALSE)
 print(tabella_stromboli)
 
-# CONVERSIONE DELLA TABELLA PER GGPLOT2
-df_long <- melt(tabella_stromboli, id.vars = "Classe", variable.name = "Periodo", value.name = "Percentuale")
+# REALIZZZAZIONE DI UN GRAFICO COMPARATIVO CON I PACCHETTI GGPLOT2 E PATCHWORK
 
-# COSTRUZIONE DEL GRAFICO COMPARATIVO CON GGPLOT2
-grafico_copertura <- ggplot(df_long, aes(x = Classe, y = Percentuale, fill = Periodo)) +                                               
-  geom_bar(stat = "identity", position = "dodge") +                                                                                     
-  geom_text(aes(label = round(Percentuale, 1)), position = position_dodge(width = 0.9), vjust = -0.25, size = 3) +                      
-  scale_fill_manual(values = c("Pre_parossismo" = "#0B0425", "Post_parossismo" = "#357BA2", "Recupero_2020" = "#DEF5E5")) +
-  ylim(0, 100) +
-  labs(title = "Evoluzione della copertura del suolo a Stromboli (NDVI > 0.27)", y = "Percentuale (%)", x = "Classe di Copertura") +
-  theme_minimal()
+# Associamo univocamente dei colori rappresentativi alle classi
+colori_classi <- c("Non vegetazione" = "#4A4A4A", "Vegetazione" = "#2E8B57")    # verde per vegetazione e grigio scuro per suolo vulcanico
+
+# PRIMO PLOT - Giugno 2019 (Pre)
+
+p1 <- ggplot(df_giu19, aes(x = Classe, y = Percentuale, fill = Classe)) + # Inizializza il grafico legando dati e variabili estetiche
+  geom_bar(stat = "identity", width = 0.6) +                              # Disegna le barre usando i valori esatti di Percentuale
+  geom_text(aes(label = paste0(round(Percentuale, 1), "%")),              # Aggiunge le etichette di testo arrotondate alla prima cifra
+            vjust = -0.5,                                                 # Sposta leggermente il testo sopra l'estremità della barra
+            fontface = "bold",                                            # Imposta il font del testo in grassetto
+            size = 3.5) +                                                 # Regola la dimensione dei caratteri numerici
+  scale_fill_manual(values = colori_classi) +                             # Applica la nostra palette di colori personalizzata
+  ylim(0, 105) +                                                          # Estende l'asse y oltre il 100% per non tagliare le etichette
+  labs(title = "Giugno 2019 (Pre)",                                       # Specifica il titolo del singolo pannello grafico
+       y = "Percentuale (%)",                                             # Specifica l'etichetta descrittiva dell'asse y
+       x = NULL) +                                                        # Rimuove il titolo dell'asse x (già chiaro dalle categorie)
+  theme_minimal() +                                                       # Applica un tema grafico minimale di base
+  theme(
+    legend.position = "none",                                            # Nasconde la legenda singola per evitare duplicazioni
+    plot.title = element_text(face = "bold", hjust = 0.5),               # Centra il titolo del pannello e lo rende in grassetto
+    panel.grid.major = element_blank(),                                  # RAGGIUNTO: Elimina le linee di griglia principali
+    panel.grid.minor = element_blank(),                                  # RAGGIUNTO: Elimina le linee di griglia secondarie
+    axis.line.x = element_line(color = "black")                          # Disegna una linea nera solida di base solo sull'asse x
+  )
+
+
+# PLOT 2 e 3 (stessa struttura)
+
+# Agosto 2019 (Post)
+p2 <- ggplot(df_ago19, aes(x = Classe, y = Percentuale, fill = Classe)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  geom_text(aes(label = paste0(round(Percentuale, 1), "%")), vjust = -0.5, fontface = "bold", size = 3.5) +
+  scale_fill_manual(values = colori_classi) +
+  ylim(0, 105) +
+  labs(title = "Agosto 2019 (Post)", y = NULL, x = NULL) +               
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    panel.grid.major = element_blank(),                                  
+    panel.grid.minor = element_blank(),
+    axis.line.x = element_line(color = "black")
+  )
+
+# Giugno 2020 (Recupero)
+p3 <- ggplot(df_giu20, aes(x = Classe, y = Percentuale, fill = Classe)) +
+  geom_bar(stat = "identity", width = 0.6) +
+  geom_text(aes(label = paste0(round(Percentuale, 1), "%")), vjust = -0.5, fontface = "bold", size = 3.5) +
+  scale_fill_manual(values = colori_classi) +
+  ylim(0, 105) +
+  labs(title = "Giugno 2020 (Recupero)", y = NULL, x = NULL) +            
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    panel.grid.major = element_blank(),                              
+    panel.grid.minor = element_blank(),
+    axis.line.x = element_line(color = "black")
+  )
+
+# COMPOSIZIONE DEI TRE PLOT E SALVATAGGIO IN ALTA RISOLUZIONE
+
+# Combiniamo i grafici affiancandoli orizzontalmente con l'operatore "+" 
+grafico_patchwork <- (p1 + p2 + p3) + 
+  plot_annotation(
+    title = "Evoluzione della copertura del suolo a Stromboli",          # Titolo generale di tutto il patchwork
+    subtitle = "Classificazione condizionale basata su NDVI (Soglia vegetazione > 0.27)", # Sottotitolo generale
+    theme = theme(
+      plot.title = element_text(face = "bold", size = 15, hjust = 0.5),  # Centra e formatta il titolo generale
+      plot.subtitle = element_text(size = 11, hjust = 0.5, face = "italic") # Centra e formatta il sottotitolo generale
+    )
+  )
+
+# Salvataggio in PNG
+ggsave("immagini progetto stromboli/grafico_patchwork_copertura.png", 
+       plot = grafico_patchwork, 
+       width = 12, 
+       height = 5, 
+       dpi = 300)
+
+print(grafico_copertura)
+dev.off()
 
 # ESPORTAZIONE E SALVATAGGIO DEL GRAFICO IN ALTA RISOLUZIONE
 ggsave("immagini progetto stromboli/grafico_barre_confronto.png", plot = grafico_copertura, width = 10, height = 6, dpi = 300)
 
-#PRODUZIONE DI UN RIDGELINE PLOT
-# Creazione dello stack dei layer NDVI e assegnazione dei relativi nomi
-ndvi_stack <- c(ndvi_giu_19, ndvi_ago_19, ndvi_giu_20)
-names(ndvi_stack) <- c("NDVI_Giu19_Pre", "NDVI_Ago19_Post", "NDVI_Giu20_Recupero")
 
-# Generazione del ridgeline plot per il confronto delle distribuzioni c
-im.ridgeline(ndvi_stack, scale=1, palette="mako")    # escono delle curve molto appuntite a causa della presenza di molti pixel d'H2O
+# PRODUZIONE DI UN RIDGELINE PLOT (
+# Creazione dello stack
+ndvi_stack <- c(ndvi_giu_19, ndvi_ago_19, ndvi_giu_20)
+
+# Utilizziamo prefissi numerici decrescenti (3, 2, 1) per ingannare l'asse y di ggplot:
+# Il valore "3" (Giugno 2019) finirà in cima al grafico, il "1" (Giugno 2020) alla base.
+names(ndvi_stack) <- c("3. NDVI Giugno 2019 (Pre)", "2. NDVI Agosto 2019 (Post)", "1. NDVI Giugno 2020 (Recupero)")
 
 # Mascheriamo lo stack escludendo i pixel di mare (NDWI > 0) per ripulire le distribuzioni
 ndvi_stack_isola <- ndvi_stack
 ndvi_stack_isola[ndwi_giu19 > 0] <- NA
 
-# Generazione del ridgeline plot pulito sulla sola terraferma
+# Generazione del ridgeline plot con tema minimale
 png("immagini progetto stromboli/grafico_ridgeline_ndvi.png", width = 10, height = 7, units = "in", res = 300)
-im.ridgeline(ndvi_stack_isola, scale=1, palette="inferno")
+im.ridgeline(ndvi_stack_isola, scale=1, palette="inferno") + theme_minimal()
 dev.off()
-
-
 
 
 
