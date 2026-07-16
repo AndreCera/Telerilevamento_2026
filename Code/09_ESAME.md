@@ -62,6 +62,7 @@ library(terra)      # Pacchetto principale per lavorare con raster e immagini sa
 library(viridis)    # 8 color scales adatte anche a utenti con daltonismo
 library(ggplot2)    # Per la creazione di grafici
 library(reshape2)   # Riorganizzare i dati nei dataframes
+library(imageRy)    # Pacchetto didattico e utile per svolgere alcuni tasks con un'unica funzione
 ```
 
 Gli indici spettrali calcolati e confrontati sono i seguenti:
