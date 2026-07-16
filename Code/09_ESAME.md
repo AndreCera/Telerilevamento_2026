@@ -429,7 +429,7 @@ dev.off()
 
 <img width="4200" height="1500" alt="nbr_recupero_2020" src="https://github.com/user-attachments/assets/497a71c1-e34f-447e-8a48-ad519f5117e7" />
 
-A distanza di un anno si testimonia un diffuso recupero, con ancora tracce di suolo bruciato a giugno 2020.
+>A distanza di un anno si testimonia un diffuso recupero, con ancora tracce di suolo bruciato a giugno 2020.
 
 ```r
 # Bilancio Netto Annuale NBR (Giugno 19 vs Giugno 20)
