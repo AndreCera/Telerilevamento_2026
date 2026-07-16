@@ -566,15 +566,25 @@ perc_suolo_giu20 <- freq_giu20$count[2] * 100 / isola_giu20           # 74.82413
 perc_veg_giu20   <- freq_giu20$count[3] * 100 / isola_giu20           # 25.17587
 ```
 
-Salviamo i risultati in una tabella 
-
+Creiamo ora con la funzione `data.frame()` delle tabelline di risultati che ci permetteranno di presentare le percentuali in una tabella unica e ci aiuteranno nella produzione di un grafico di confronto con `ggplot()`
 ```r
-tabella_stromboli <- data.frame(
+df_giu19 <- data.frame(                                            # Piccoli dataframe separati per ciascuna data (giugno 2019)
   Classe = c("Non vegetazione", "Vegetazione"),
-  Pre_parossismo = round(c(perc_suolo_giu19, perc_veg_giu19), 2),
-  Post_parossismo = round(c(perc_suolo_ago19, perc_veg_ago19), 2),
-  Recupero_2020 = round(c(perc_suolo_giu20, perc_veg_giu20), 2)
-)
+  Percentuale = c(perc_suolo_giu19, perc_veg_giu19))
+
+df_ago19 <- data.frame(                                            # Agosto 2019
+  Classe = c("Non vegetazione", "Vegetazione"),
+  Percentuale = c(perc_suolo_ago19, perc_veg_ago19))
+
+df_giu20 <- data.frame(                                            # Giugno 2020
+  Classe = c("Non vegetazione", "Vegetazione"),
+  Percentuale = c(perc_suolo_giu20, perc_veg_giu20))
+
+tabella_stromboli <- cbind(                                        # La funzione cbind() permette di incollare colonne a destra
+  Classe = df_giu19$Classe,                                        # Scelgo il nome delle colonne del dataframe
+  Pre_parossismo = df_giu19$Percentuale,
+  Post_parossismo = df_ago19$Percentuale,
+  Recupero = df_giu20$Percentuale)
 ```
 
 I valori risultanti sono riassunti nella tabella seguente:
@@ -587,24 +597,49 @@ I valori risultanti sono riassunti nella tabella seguente:
 >I dati mostrano una riduzione della superficie vegetata da quasi un 36% ad appena un 8% tra giugno e agosto 2019 (una perdita relativa di circa il 77% della vegetazione
 presente), seguita da un recupero parziale al 25% entro giugno 2020, un valore ancora sensibilmente inferiore a quello precedente agli incendi.
 
-Tramite alla funzione `melt()` di `reshape2` e alla funzione `ggplot()` di `ggplot2`
+A questo punto, associamo univocamente dei colori rappresentativi alle classi, poi utilizziamo la funzione `ggplot()` del pacchetto `ggplot2` per generare un grafico a barre personalizzato per ciascuna fase 
+temporale, ripulendo l'estetica di sfondo con la funzione `theme()`. 
 
 ```r
-# CONVERSIONE DELLA TABELLA PER GGPLOT2
-# La funzione melt() del pacchetto reshape2 trasforma un dataframe dal formato largo al formato lungo
-df_long <- melt(tabella_stromboli, id.vars = "Classe", variable.name = "Periodo", value.name = "Percentuale")  
+colori_classi <- c("Non vegetazione" = "#4A4A4A", "Vegetazione" = "#2E8B57")    # verde per vegetazione e grigio scuro per suolo vulcanico
+# PRIMO PLOT - Giugno 2019 (Pre)
 
-# COSTRUZIONE DEL GRAFICO COMPARATIVO CON GGPLOT2
-grafico_copertura <- ggplot(df_long, aes(x = Classe, y = Percentuale, fill = Periodo)) +                                               
-  geom_bar(stat = "identity", position = "dodge") +                                                                                     
-  geom_text(aes(label = round(Percentuale, 1)), position = position_dodge(width = 0.9), vjust = -0.25, size = 3) +                      
-  scale_fill_manual(values = c("Pre_parossismo" = "#0B0425", "Post_parossismo" = "#357BA2", "Recupero_2020" = "#DEF5E5")) +
-  ylim(0, 100) +
-  labs(title = "Evoluzione della copertura del suolo a Stromboli (NDVI > 0.27)", y = "Percentuale (%)", x = "Classe di Copertura") +
-  theme_minimal()
+p1 <- ggplot(df_giu19, aes(x = Classe, y = Percentuale, fill = Classe)) + # Inizializza il grafico legando dati e variabili estetiche
+  geom_bar(stat = "identity", width = 0.6) +                              # Disegna le barre usando i valori esatti di Percentuale
+  geom_text(aes(label = paste0(round(Percentuale, 1), "%")),              # Aggiunge le etichette di testo arrotondate alla prima cifra
+            vjust = -0.5,                                                 # Sposta leggermente il testo sopra l'estremità della barra
+            fontface = "bold",                                            # Imposta il font del testo in grassetto
+            size = 3.5) +                                                 # Regola la dimensione dei caratteri numerici
+  scale_fill_manual(values = colori_classi) +                             # Applica la nostra palette di colori personalizzata
+  ylim(0, 105) +                                                          # Estende l'asse y oltre il 100% per non tagliare le etichette
+  labs(title = "Giugno 2019 (Pre)",                                       # Specifica il titolo del singolo pannello grafico
+       y = "Percentuale (%)",                                             # Specifica l'etichetta descrittiva dell'asse y
+       x = NULL) +                                                        # Rimuove il titolo dell'asse x (già chiaro dalle categorie)
+  theme_minimal() +                                                       # Applica un tema grafico minimale di base
+  theme(
+    legend.position = "none",                                            # Nasconde la legenda singola per evitare duplicazioni
+    plot.title = element_text(face = "bold", hjust = 0.5),               # Centra il titolo del pannello e lo rende in grassetto
+    panel.grid.major = element_blank(),                                  # RAGGIUNTO: Elimina le linee di griglia principali
+    panel.grid.minor = element_blank(),                                  # RAGGIUNTO: Elimina le linee di griglia secondarie
+    axis.line.x = element_line(color = "black")                          # Disegna una linea nera solida di base solo sull'asse x
+  )
 ```
 
-<img width="3000" height="1800" alt="grafico_barre_confronto" src="https://github.com/user-attachments/assets/7bffb99a-81d7-4066-b238-89d790600cf6" />
+Ripeto la stessa procedura per i plot "p2" e "p3" ed eseguo un merge con l'operatore `+` grazie al richiamo del pacchetto `patchwork` e rendo la grafica del testo definitiva con la funzione `plot_annotation`
+
+```r
+grafico_patchwork <- (p1 + p2 + p3) + 
+  plot_annotation(
+    title = "Evoluzione della copertura del suolo a Stromboli",          # Titolo generale di tutto il patchwork
+    subtitle = "Classificazione condizionale basata su NDVI (Soglia vegetazione > 0.27)", # Sottotitolo generale
+    theme = theme(
+      plot.title = element_text(face = "bold", size = 15, hjust = 0.5),  # Centra e formatta il titolo generale
+      plot.subtitle = element_text(size = 11, hjust = 0.5, face = "italic") # Centra e formatta il sottotitolo generale
+    )
+  )
+```
+
+<img width="3600" height="1500" alt="grafico_patchwork_copertura" src="https://github.com/user-attachments/assets/946d1a7e-43d9-49ca-b0ad-d0e745e9d286" />
 
 Infine, per confrontare in modo più diretto la distribuzione dei valori di NDVI sulla terraferma nelle tre date, è stato prodotto un ridgeline plot. Un primo 
 tentativo, condotto sull'intero stack (comprensivo dei pixel di mare), ha riportato distribuzioni eccessivamente appuntite a causa della grande quantità di 
