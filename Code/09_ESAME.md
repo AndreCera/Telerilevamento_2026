@@ -31,8 +31,7 @@ craterica, situata nella parte sommitale della Sciara del Fuoco (Carapezza et al
 
 <img width="711" height="632" alt="mappa_geologica_stromboli" src="https://github.com/user-attachments/assets/6ba55bc4-19f1-46ca-bfce-0d75f9fde615" />
 
-
-*Fig. 1. Carta strutturale schematica di Stromboli (Carapezza et al., 2009).*
+>Fig. 1. Carta strutturale schematica di Stromboli (Carapezza et al., 2009).
 
 L'attività ordinaria del vulcano, detta "stromboliana", consiste in esplosioni brevi, ricorrenti e di modesta energia; essa può occasionalmente essere 
 intecalata da colate laviche o parossismi maggiormente esplosivi, questi ultimi rappresentando le manifestazioni più pericolose dell'attività vulcanica 
@@ -93,7 +92,7 @@ b8_giu19 <- rast("S2A_MSIL2A_20190607T095031_N0500_R079_T33SWC_20221219T154232.S
 # Caricamento della Banda 12 (SWIR) a 20 metri per Giugno 2019
 b12_giu19 <- rast("S2A_MSIL2A_20190607T095031_N0500_R079_T33SWC_20221219T154232.SAFE/GRANULE/L2A_T33SWC_A020668_20190607T095825/IMG_DATA/R20m/T33SWC_20190607T095031_B12_20m.jp2")
 ```
-La stessa procedura è stata eseguita per importare le bande di agosto 2019 e giugno 2020.
+>La stessa procedura è stata eseguita per importare le bande di agosto 2019 e giugno 2020.
 
 Prima di procedere, è stata verificata la coerenza spaziale (sistema di riferimento ed estensione) tra le tre acquisizioni, condizione necessaria per un 
 confronto multitemporale corretto:
@@ -129,7 +128,7 @@ b4_giu19_crop <- crop(b4_giu19, estensione_stromboli)
 b8_giu19_crop <- crop(b8_giu19, estensione_stromboli)
 b12_giu19_crop <- resample(crop(b12_giu19, estensione_stromboli), b2_giu19_crop, method="bilinear") # ritaglia e ricampiona b12 sulla griglia di b2
 ```
-Anche in questo caso, lo stesso procedimento è stato ultimato per le altre due date.
+>Anche in questo caso, lo stesso procedimento è stato ultimato per le altre due date.
 
 Infine, le bande ritagliate sono state unite in tre stack multibanda (uno per data), con i livelli rinominati per rendere il codice successivo più leggibile:
 
@@ -170,7 +169,7 @@ dev.off()
 
 <img width="3600" height="2400" alt="bande_separate_giu19" src="https://github.com/user-attachments/assets/f7ee8a9b-803d-43ca-895b-0127d1a2d8f9" />
 
-Il NIR risulta molto più caratterizzante delle altre bande, segnalando una vegetazione relativamente uniforme nella condizione pre-parossismo eccetto
+>Il NIR risulta molto più caratterizzante delle altre bande, segnalando una vegetazione relativamente uniforme nella condizione pre-parossismo eccetto
 che nella Sciara del Fuoco
 
 ### 5.2 Agosto 2019 (post-parossismo)
@@ -187,7 +186,7 @@ dev.off()
 
 <img width="3600" height="2400" alt="bande_separate_ago19" src="https://github.com/user-attachments/assets/04e1a88b-811c-46be-904b-602fba5ef64b" />
 
-Diminuisce la riflettanza nel NIR in seguito agli incendi che hanno devastato la vegetazione mentre amumenta quella nel rosso
+>Diminuisce la riflettanza nel NIR in seguito agli incendi che hanno devastato la vegetazione mentre amumenta quella nel rosso
 
 ### 5.3 Giugno 2020 (recupero)
 
@@ -203,7 +202,7 @@ dev.off()
 
 <img width="3600" height="2400" alt="bande_separate_giu20" src="https://github.com/user-attachments/assets/f98e1606-a8b4-4c00-86b3-74b694c81d52" />
 
-L'assorbimento della banda rossa ritorna alle condizioni pre-parossismo ma il NIR ancora non pareggia i livelli di riflettanza dell'anno precedente
+>L'assorbimento della banda rossa ritorna alle condizioni pre-parossismo ma il NIR ancora non pareggia i livelli di riflettanza dell'anno precedente
 
 ### 5.4 Plot RGB: True e False Colors
 
@@ -218,7 +217,8 @@ dev.off()                                     # Chiudere il pannello di visualiz
 
 <img width="1000" alt="true_color_confronto" src="https://github.com/user-attachments/assets/ce475319-2ea7-4d73-a7d6-66bd93cf9b7b" />
 
-Gli effetti dell'eruzione del 2019 sono apprezzabili anche dall'occhio umano: la perdita delle aree verdi, principalmente macchia mediterranea, è lampante nel settore occidentale dell'isola, mentre il recupero è solo parziale a giugno 2020
+>Gli effetti dell'eruzione del 2019 sono apprezzabili anche dall'occhio umano: la perdita delle aree verdi, principalmente macchia mediterranea, è lampante nel settore occidentale dell'isola, mentre il
+> recupero è solo parziale a giugno 2020
 
 ```r
 # VISUALIZZAZIONE IN FALSI COLORI (RGB 4,3,2)
@@ -230,7 +230,7 @@ dev.off()
 ```
 <img width="1000" alt="false_color_confronto" src="https://github.com/user-attachments/assets/7474e769-051f-4120-b74c-8a118a54a738" />
 
-Nel falso colore (NIR-Rosso-Verde) la vegetazione sana appare tipicamente in tonalità rosse/rosate: una riduzione di queste tonalità tra giugno e agosto 2019 è il 
+>Nel falso colore (NIR-Rosso-Verde) la vegetazione sana appare tipicamente in tonalità rosse/rosate: una riduzione di queste tonalità tra giugno e agosto 2019 è il 
 segnale atteso dell'impatto degli incendi.
 
 ### 5.5 Confronto diretto delle bande RGB + NIR
@@ -256,7 +256,7 @@ dev.off()
 
 <img width="4800" height="2400" alt="confronto_bande_19_pre_post" src="https://github.com/user-attachments/assets/ea0481d3-24e6-4cd2-9111-b85e36384f05" />
 
-Questa immagine mostra come la maggior differenza non si presenta nelle bande del visibile, le quali sono in entrambi i casi caratterizzate da un assorbimento 
+>Questa immagine mostra come la maggior differenza non si presenta nelle bande del visibile, le quali sono in entrambi i casi caratterizzate da un assorbimento 
 elevato, ma dalla riflettanza del NIR, la quale subisce un crollo causato dalla devastazione della vegetazione
 
 ## 6. Calcolo degli indici spettrali di vegetazione
@@ -290,7 +290,7 @@ dev.off()
 ```
 <img width="4200" height="1500" alt="dvi_impatto_2019" src="https://github.com/user-attachments/assets/e13de17f-48a0-4ef3-9660-16e71e8dcd1f" />
 
-Il grafico pre mostra una vegetazione in salute sull'isola di Stromboli, ad esclusione dell'area del Pizzo e della Sciara del Fuoco, soggette a frequenti invasioni da
+>Il grafico pre mostra una vegetazione in salute sull'isola di Stromboli, ad esclusione dell'area del Pizzo e della Sciara del Fuoco, soggette a frequenti invasioni da
 colate laviche e da altri prodotti vulcanici. Il post evidenzia una devastazione pressoché totale della vegetazione, che interessa gran parte dell'isola, determinando
 un crollo, in tonalità, del DVI. La differenza, visualizzata in scala di grigi, mostra come anche il settore nord-orientale sia stato colpito, seppur in misura minore.
 
@@ -305,7 +305,7 @@ dev.off()
 
 <img width="4200" height="1500" alt="dvi_recupero_2020" src="https://github.com/user-attachments/assets/776a020e-bd0c-4b84-8647-7bd18fe68f28" />
 
-Giugno 2020 presenta valori di DVI piuttosto alti, sparsi sull'isola, che ricordano per certi versi la condizione pre-parossismo; il delta rivela un incoraggiante recupero su gran parte dell'isola.
+>Giugno 2020 presenta valori di DVI piuttosto alti, sparsi sull'isola, che ricordano per certi versi la condizione pre-parossismo; il delta rivela un incoraggiante recupero su gran parte dell'isola.
 
 ```r
 # Bilancio Netto Annuale DVI (Giugno vs Giugno)
@@ -318,7 +318,8 @@ dev.off()
 
 <img width="4200" height="1500" alt="dvi_bilancio_annuale" src="https://github.com/user-attachments/assets/63119cf9-627b-4b1d-bf0f-da2e3f01c42f" />
 
-Il confronto tra giugno 2019 e giugno 2020 mette in chiaro come il recupero sia solo parziale: la risposta della copertura vegetale non ha ancora bilanciato i danni degli incendi, specialmente nei settori occidentale e sud-occidentale.
+>Il confronto tra giugno 2019 e giugno 2020 mette in chiaro come il recupero sia solo parziale: la risposta della copertura vegetale non ha ancora bilanciato i danni degli incendi, specialmente nei settori 
+occidentale e sud-occidentale.
 
 ### 6.2 NDVI (Normalized Difference Vegetation Index)
 
@@ -353,7 +354,7 @@ dev.off()
 
 <img width="4200" height="1500" alt="ndvi_impatto_2019" src="https://github.com/user-attachments/assets/47b7e9b5-5990-4fb8-a4b7-2a6699fa846d" />
 
-Similmente al DVI, l'NDVI mostra una grande differenza tra lo scenario pre e post; a differenza del DVI, tuttavia, viene rappresentata meglio la salute della vegetazione nello scenario pre-eruttivo.
+>Similmente al DVI, l'NDVI mostra una grande differenza tra lo scenario pre e post; a differenza del DVI, tuttavia, viene rappresentata meglio la salute della vegetazione nello scenario pre-eruttivo.
 
 ```r
 # Recupero NDVI (2019 vs 2020)
@@ -366,7 +367,7 @@ dev.off()
 
 <img width="4200" height="1500" alt="ndvi_recupero_2020" src="https://github.com/user-attachments/assets/927b4279-9d7b-4ca2-9aee-02555e5ac220" />
 
-Il recupero di giugno 2020 appare abbastanza omogeneo, con una vegetazione apparentemente in salute nel settore orientale.
+>Il recupero di giugno 2020 appare abbastanza omogeneo, con una vegetazione apparentemente in salute nel settore orientale.
 
 ```r
 # Bilancio Netto Annuale NDVI (Giugno vs Giugno)
@@ -379,7 +380,7 @@ dev.off()
 
 <img width="4200" height="1500" alt="ndvi_bilancio_annuale" src="https://github.com/user-attachments/assets/2f43c407-fa28-4f02-b2de-f7684424f379" />
 
-Il confronto annuale conferma come, specialmente il versante occidentale del vulcano, sia ancora in una condizione di crisi ecologica a un anno di distanza dall'eruzione.
+>Il confronto annuale conferma come, specialmente il versante occidentale del vulcano, sia ancora in una condizione di crisi ecologica a un anno di distanza dall'eruzione.
 
 ### 6.3 NBR (Normalized Burn Ratio)
 
@@ -442,14 +443,18 @@ dev.off()
 
 <img width="4200" height="1500" alt="nbr_bilancio_annuale" src="https://github.com/user-attachments/assets/038f665d-8049-426c-ac1f-7e117596848a" />
 
-Il bilancio annuale è inclemente, evidenziando settori ancora privi di vegetazione in diverse zone dell'isola.
+>Il bilancio annuale è inclemente, evidenziando settori ancora privi di vegetazione in diverse zone dell'isola.
 
 ## 7.1 Classificazione
 
 Per ottenere una stima quantitativa dell'impatto sulla copertura del suolo, è stata costruita, per ciascuna data, una classificazione in tre classi (mare, suolo nudo/
 cenere, vegetazione) basata su semplici soglie applicate a NDWI e NDVI.
 
-Il primo passo è stato calcolare l'NDWI su tutte e tre le date: come indicato in precedenza, il suo utilizzo qui non è finalizzato a una vera e propria caratterizzazione
+Il primo passo è stato calcolare l'NDWI su tutte e tre le date:
+
+$` NDWI = \frac{NIR - SWIR1}{NIR + SWIR1} `$
+
+Come indicato in precedenza, il suo utilizzo qui non è finalizzato a una vera e propria caratterizzazione
 idrologica, ma esclusivamente a isolare i pixel di mare (valori di NDWI positivi) e poterli quindi trattare come a sè stanti nella classificazione:
 
 ```r
@@ -484,7 +489,7 @@ veg_giu20   <- ndvi_giu_20 > 0.27
 suolo_giu20 <- ndwi_giu20 <= 0 & ndvi_giu_20 <= 0.27
 ```
 
-Le tre classi (codificate 1 = mare, 2 = suolo, 3 = vegetazione) sono state quindi assegnate a una mappa derivata dall'NDVI:
+Le tre classi (1 = mare, 2 = suolo, 3 = vegetazione) sono state quindi assegnate a una mappa derivata dall'NDVI:
 
 ```r
 # Giugno 2019
@@ -517,7 +522,7 @@ dev.off()
 
 <img width="4500" height="1500" alt="classificazione_ternaria_confronto" src="https://github.com/user-attachments/assets/47c0cd75-a11a-46cf-8776-d25eedbf5af3" />
 
-La classificazione risente di alcuni valori anomali fra i pixel di acqua di giugno 2019 e di una nuvola in agosto, ma mostra chiaramente "l'avanzare" del suolo
+>La classificazione risente di alcuni valori anomali fra i pixel di acqua di giugno 2019 e di una nuvola in agosto, ma mostra chiaramente "l'avanzare" del suolo
 nudo/cenere nell'immediato intorno dell'eruzione e una parziale ripresa della vegetazione dopo un anno di recupero.
 
 ```r
@@ -531,7 +536,7 @@ dev.off()
 
 <img width="4500" height="1500" alt="confronto_maschere_vegetazione" src="https://github.com/user-attachments/assets/56be8492-bc1d-4493-8fbe-cd0a756d17de" />
 
-Le maschere binarie isolano il cambiamento della vegetazione, isolando elevati valori di NDVI come "marker" di una vegetazione ancora in salute: se nel settore
+>Le maschere binarie isolano il cambiamento della vegetazione, isolando elevati valori di NDVI come "marker" di una vegetazione ancora in salute: se nel settore
 orientale dell'isola la ripresa dagli incendi è stata incoraggiante, le altre aree di Stromboli appaiono ancora profondamente colpite a un anno dal parossismo 
 vulcanico
 
@@ -546,7 +551,7 @@ freq_ago19 <- freq(clas_ago19)
 freq_giu20 <- freq(clas_giu20)
 ```
 
-Si salva quindi la somma dei pixel di vegetazione e di suolo in un nuovo oggetto grazie all'operatore `$`
+Si salva quindi la somma dei pixel di vegetazione e di suolo in un nuovo oggetto grazie all'operatore `$` 
 
 ```r
 # ESTRAZIONE DEI CONTEGGI PURI PER ISOLARE LA TERRAFERMA ESCLUDENDO IL MARE
@@ -567,6 +572,7 @@ perc_veg_giu20   <- freq_giu20$count[3] * 100 / isola_giu20           # 25.17587
 ```
 
 Creiamo ora con la funzione `data.frame()` delle tabelline di risultati che ci permetteranno di presentare le percentuali in una tabella unica e ci aiuteranno nella produzione di un grafico di confronto con `ggplot()`
+
 ```r
 df_giu19 <- data.frame(                                            # Piccoli dataframe separati per ciascuna data (giugno 2019)
   Classe = c("Non vegetazione", "Vegetazione"),
@@ -594,8 +600,10 @@ I valori risultanti sono riassunti nella tabella seguente:
 | Non vegetazione | 64,21 % | 91,93 % | 74,82 % |
 | Vegetazione | 35,79 % | 8,07 % | 25,18 % |
 
->I dati mostrano una riduzione della superficie vegetata da quasi un 36% ad appena un 8% tra giugno e agosto 2019 (una perdita relativa di circa il 77% della vegetazione
-presente), seguita da un recupero parziale al 25% entro giugno 2020, un valore ancora sensibilmente inferiore a quello precedente agli incendi.
+>I dati mostrano una riduzione della superficie vegetata da quasi un 36% ad appena un 8% tra giugno e agosto 2019 (una perdita relativa di circa il 77% della vegetazione presente), seguita da un recupero
+>parziale al 25% entro giugno 2020, un valore ancora sensibilmente inferiore a quello precedente agli incendi. Specularmente, la classe di non vegetazione passa da circa il 64% del pre-parossismo a oltre il
+>92% nell'immediato post-evento, per poi ridiscendere al 75% circa a un anno di distanza: il suolo nudo/cenere resta quindi la copertura ampiamente dominante sull'isola anche dopo un anno, a conferma che il
+>recupero della vegetazione, per quanto incoraggiante, resta parziale e non riporta l'isola alle condizioni pre-eruttive.
 
 A questo punto, associamo univocamente dei colori rappresentativi alle classi, poi utilizziamo la funzione `ggplot()` del pacchetto `ggplot2` per generare un grafico a barre personalizzato per ciascuna fase 
 temporale, ripulendo l'estetica di sfondo con la funzione `theme()`. 
@@ -625,7 +633,7 @@ p1 <- ggplot(df_giu19, aes(x = Classe, y = Percentuale, fill = Classe)) + # Iniz
   )
 ```
 
-Ripeto la stessa procedura per i plot "p2" e "p3" ed eseguo un merge con l'operatore `+` grazie al richiamo del pacchetto `patchwork` e rendo la grafica del testo definitiva con la funzione `plot_annotation`
+Ripeto la stessa procedura per i plot "p2" e "p3" ed eseguo un merge con l'operatore `+` grazie al richiamo del pacchetto `patchwork` e rendo la grafica del testo definitiva con la funzione `plot_annotation()`
 
 ```r
 grafico_patchwork <- (p1 + p2 + p3) + 
@@ -641,14 +649,20 @@ grafico_patchwork <- (p1 + p2 + p3) +
 
 <img width="3600" height="1500" alt="grafico_patchwork_copertura" src="https://github.com/user-attachments/assets/946d1a7e-43d9-49ca-b0ad-d0e745e9d286" />
 
+>Il grafico riorganizza il confronto in tre pannelli distinti, uno per data (Giugno 2019, Agosto 2019, Giugno 2020), ciascuno con due sole barre: "Non vegetazione" (grigio antracite) e "Vegetazione" (verde).
+>Il pannello centrale rende immediatamente evidente, a colpo d'occhio, la devastazione del post-parossismo: la barra verde crolla a poco più dell'8%, mentre quella grigia arriva quasi a saturare l'intero
+>grafico (91,9%), un rapporto di oltre 11 a 1 tra suolo nudo e vegetazione che testimonia l'entità dell'impatto degli incendi. Il terzo pannello (giugno 2020) mostra invece un riequilibrio parziale: la
+>vegetazione risale al 25,2%, più che triplicando rispetto al minimo post-evento, ma il confronto diretto con il primo pannello (35,8%) rende visivamente chiaro che il recupero, per quanto reale, non ha
+>ancora colmato il divario rispetto alla condizione pre-eruttiva; l'isola, a un anno di distanza, è ancora più "grigia" che "verde" rispetto a come si presentava prima del 3 luglio 2019.
+
+# PRODUZIONE DI UN RIDGELINE PLOT
+
 Infine, per confrontare in modo più diretto la distribuzione dei valori di NDVI sulla terraferma nelle tre date, è stato prodotto un ridgeline plot. Un primo 
 tentativo, condotto sull'intero stack (comprensivo dei pixel di mare), ha riportato distribuzioni eccessivamente appuntite a causa della grande quantità di 
 pixel d'acqua concentrati intorno allo stesso valore di NDVI: mascherando lo stack per escludere i pixel di mare (NDWI > 0), le distribuzioni risultano molto 
 più leggibili e interpretabili:
 
 ```r
-# PRODUZIONE DI UN RIDGELINE PLOT
-
 ndvi_stack <- c(ndvi_giu_19, ndvi_ago_19, ndvi_giu_20)                                                                # Organizziamo gli NDVI delle 3 date in uno stack unico
 names(ndvi_stack) <- c("3. NDVI Giugno 2019 (Pre)", "2. NDVI Agosto 2019 (Post)", "1. NDVI Giugno 2020 (Recupero)")   # Utilizziamo prefissi numerici decrescenti (3, 2, 1) per ingannare l'asse y di ggplot
 ndvi_stack_isola <- ndvi_stack                                                                                        # Creo una copia per evitare di sovrascrivere l'oggetto "ndvi_stack"
@@ -658,8 +672,12 @@ im.ridgeline(ndvi_stack_isola, scale=1, palette="inferno")                      
 
 <img width="3000" height="2100" alt="grafico_ridgeline_ndvi" src="https://github.com/user-attachments/assets/c2466c6d-628b-4f47-a7a7-eb2cbde2a362" />
 
-La distribuzione dei pixel di agosto 2019 è spostata verso valori di NDVI più bassi rispetto a giugno 2019, quella di giugno 2020 si colloca in una posizione
-in qualche modo intermedia, coerentemente con un recupero solo parziale.
+>A giugno 2019 la distribuzione dell'NDVI si presenta bimodale: un primo picco basso, concentrato intorno allo zero, riconducibile alle porzioni dell'isola prive di vegetazione per natura (il Pizzo e la Sciara
+>del Fuoco, costantemente rimodellati da colate e prodotti vulcanici), e un secondo picco a valori più alti, corrispondente alla vegetazione sana diffusa sul resto dell'isola. Ad agosto 2019 questa bimodalità
+>scompare quasi del tutto: la distribuzione collassa in un unico picco, più alto dei precedenti, concentrato attorno allo zero — segno che gli incendi hanno eliminato in blocco la componente di vegetazione
+>sana, uniformando gran parte dell'isola verso i valori tipici di suolo nudo/cenere. A giugno 2020 osserviamo una dispersione del valore di NDVI dei pixel quasi "tri-modale": c'è un picco significativo di
+>valori intorno allo 0, pochi pixel con valori elevati (in corrispondenza del picco pre-parossismo) e un picco intermedio caratterizzato da valori di NDVI leggermente positivi, testimoni di una vegetazione
+>ancora "giovane" o non pienamente in salute, lontana dal vigore osservato prima del parossismo.
 
 ## Conclusioni
 
