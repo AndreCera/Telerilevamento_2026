@@ -265,7 +265,7 @@ Per ciascuna delle tre date sono stati calcolati gli indici DVI, NDVI e NBR e pe
 
 ### 6.1 DVI (Difference Vegetation Index)
 
-<img width="222" height="103" alt="image" src="https://github.com/user-attachments/assets/1c8b5b35-5cea-483d-a4af-15ee5aacf292" />
+$` DVI = NIR - RED `$
 
 Non essendo normalizzato, il DVI va letto soprattutto in termini relativi tra le tre date piuttosto che in valore assoluto.
 
@@ -322,7 +322,7 @@ Il confronto tra giugno 2019 e giugno 2020 mette in chiaro come il recupero sia 
 
 ### 6.2 NDVI (Normalized Difference Vegetation Index)
 
-<img width="381" height="131" alt="image" src="https://github.com/user-attachments/assets/2c0e6ff9-eed1-4eb2-b349-d492feda329b" />
+$` NDVI = \frac{NIR - RED}{NIR + RED} `$
 
 In letteratura, Iacono et al. (2025) ottengono elevate differenze di NDVI nel breve periodo, in particolare nei settori Ovest e Sud-Ovest; calcolando il nostro NDVI speriamo di confermare e ampliare, a livello temporale, questo recente monitoraggio vulcanico
 
@@ -383,9 +383,10 @@ Il confronto annuale conferma come, specialmente il versante occidentale del vul
 
 ### 6.3 NBR (Normalized Burn Ratio)
 
-Sull'esempio di Iacono et al. (2025), anche in questo lavoro è stato calcolato l'indice Normalized Burn Ratio, che sfruttando lo SWIR dovrebbe evidenziare in modo più netto le aree effettivamente percorse dal fuoco.
+$` NDVI = \frac{NIR - SWIR}{NIR + SWIR} `$
 
-<img width="370" height="116" alt="image" src="https://github.com/user-attachments/assets/33f0496c-d066-4ef6-9e68-50ef55040be7" />
+Sull'esempio di Iacono et al. (2025), anche in questo lavoro è stato calcolato l'indice Normalized Burn Ratio che, sfruttando lo SWIR dovrebbe evidenziare in modo più netto le aree effettivamente percorse dal
+fuoco.
 
 ```r
 # INDICE NBR (Normalized Burn Ratio)
@@ -414,7 +415,7 @@ dev.off()
 
 <img width="4200" height="1500" alt="nbr_impatto_2019" src="https://github.com/user-attachments/assets/5fcb3850-ef08-4558-8e5d-dfea27456075" />
 
-L'indice NBR mostra ancora meglio come, nel giro di poco più di un mese, si passi da uno scenario di vegetazione in salute a una quasi totale assenza di vegetazione nel
+>L'indice NBR mostra ancora meglio come, nel giro di poco più di un mese, si passi da uno scenario di vegetazione in salute a una quasi totale assenza di vegetazione nel
 settore meridionale dell'isola, che presenta i segni di un suolo nudo e bruciato.
 
 ```r
@@ -613,16 +614,14 @@ più leggibili e interpretabili:
 ```r
 # PRODUZIONE DI UN RIDGELINE PLOT
 
-# Mascheriamo lo stack escludendo i pixel di mare (NDWI > 0) per ripulire le distribuzioni
-ndvi_stack_isola <- ndvi_stack
-ndvi_stack_isola[ndwi_giu19 > 0] <- NA
-
-# Generazione del ridgeline plot pulito sulla sola terraferma
-im.ridgeline(ndvi_stack_isola, scale=1, palette="inferno")
-dev.off()
+ndvi_stack <- c(ndvi_giu_19, ndvi_ago_19, ndvi_giu_20)                                                                # Organizziamo gli NDVI delle 3 date in uno stack unico
+names(ndvi_stack) <- c("3. NDVI Giugno 2019 (Pre)", "2. NDVI Agosto 2019 (Post)", "1. NDVI Giugno 2020 (Recupero)")   # Utilizziamo prefissi numerici decrescenti (3, 2, 1) per ingannare l'asse y di ggplot
+ndvi_stack_isola <- ndvi_stack                                                                                        # Creo una copia per evitare di sovrascrivere l'oggetto "ndvi_stack"
+ndvi_stack_isola[ndwi_giu19 > 0] <- NA                                                                                # Escludiamo i pixel di mare (NDWI > 0) come NA
+im.ridgeline(ndvi_stack_isola, scale=1, palette="inferno")                                                            # Generazione del ridgeline plot pulito sulla sola terraferma
 ```
 
-<img width="3000" height="2100" alt="grafico_ridgeline_ndvi" src="https://github.com/user-attachments/assets/5d66dd50-a0bf-4779-b171-3e567147b336" />
+<img width="3000" height="2100" alt="grafico_ridgeline_ndvi" src="https://github.com/user-attachments/assets/c2466c6d-628b-4f47-a7a7-eb2cbde2a362" />
 
 La distribuzione dei pixel di agosto 2019 è spostata verso valori di NDVI più bassi rispetto a giugno 2019, quella di giugno 2020 si colloca in una posizione
 in qualche modo intermedia, coerentemente con un recupero solo parziale.
