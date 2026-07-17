@@ -78,7 +78,8 @@ Gli indici spettrali calcolati e confrontati sono i seguenti:
 
 ## 4. Preparazione del materiale
 
-Per ciascuna delle tre date (giugno 2019, agosto 2019, giugno 2020) sono state caricate le bande a 10 m di risoluzione (B2 - Blu, B3 - Verde, B4 - Rosso, B8 - NIR) e la banda B12 (SWIR) a 20 m di risoluzione:
+Per ciascuna delle tre date (giugno 2019, agosto 2019, giugno 2020) sono state caricate, mediante la funzione `rast()` del pacchetto `terra`, le bande a 10 m di risoluzione (B2 - Blu, B3 - Verde, B4 - Rosso, B8 - NIR) e la banda B12 (SWIR) a 20 m
+di risoluzione:
 
 ```r
 # Configurazione della cartella principale di lavoro (Working Directory)
@@ -94,7 +95,7 @@ b12_giu19 <- rast("S2A_MSIL2A_20190607T095031_N0500_R079_T33SWC_20221219T154232.
 ```
 >La stessa procedura è stata eseguita per importare le bande di agosto 2019 e giugno 2020.
 
-Prima di procedere, è stata verificata la coerenza spaziale (sistema di riferimento ed estensione) tra le tre acquisizioni, condizione necessaria per un 
+Prima di procedere, è stata verificata la coerenza spaziale (sistema di riferimento ed estensione) tra le tre acquisizioni con le funzioni `crs()` e `ext()`, condizione necessaria per un 
 confronto multitemporale corretto:
 
 ```r
@@ -130,7 +131,7 @@ b12_giu19_crop <- resample(crop(b12_giu19, estensione_stromboli), b2_giu19_crop,
 ```
 >Anche in questo caso, lo stesso procedimento è stato ultimato per le altre due date.
 
-Infine, le bande ritagliate sono state unite in tre stack multibanda (uno per data), con i livelli rinominati per rendere il codice successivo più leggibile:
+Infine, le bande ritagliate sono state unite in tre stack multibanda (uno per data) tramite l'operatore `c()`, con i livelli rinominati per rendere il codice successivo più leggibile - funzione `names()`:
 
 ```r
 # CREAZIONE DEGLI STACK MULTI-BANDA E VISUALIZZAZIONE RGB
@@ -159,12 +160,12 @@ Prima di procedere al calcolo degli indici, le bande sono state visualizzate sin
 
 ```r
 par(mfrow = c(2, 3), mar = c(4, 3, 4, 5))
-plot(str_giu_19[["B2"]], col = plasma(100), main = "Blu (B2)")
+plot(str_giu_19[["B2"]], col = plasma(100), main = "Blu (B2)")                   # Isolo la banda del blu con grazie alle parentesi aquadre [[]]
 plot(str_giu_19[["B3"]], col = plasma(100), main = "Verde (B3)")
 plot(str_giu_19[["B4"]], col = plasma(100), main = "Rosso (B4)")
 plot(str_giu_19[["B8"]], col = plasma(100), main = "NIR (B8)")
 plot(str_giu_19[["B12"]], col = plasma(100), main = "SWIR (B12)")
-dev.off()                                                               
+dev.off()                                                                        # Chiuso il pannello di visione delle immagini e reimposto la grafica di default                                                      
 ```
 
 <img width="3600" height="2400" alt="bande_separate_giu19" src="https://github.com/user-attachments/assets/f7ee8a9b-803d-43ca-895b-0127d1a2d8f9" />
@@ -208,11 +209,11 @@ dev.off()
 
 ```r
 # VISUALIZZAZIONE IN COLORI REALI (True Color - RGB 3,2,1)
-par(mfrow = c(1, 3), mar = c(3, 3, 4, 2))    # Rendiamo l'immagine multiframe e sistemo i margini per ottimizzare la visualizzazione
-plotRGB(str_giu_19, r=3, g=2, b=1, stretch="lin", main="Giugno 2019 (Pre)")
+par(mfrow = c(1, 3), mar = c(3, 3, 4, 2))                                            # Rendiamo l'immagine multiframe e sistemo i margini per ottimizzare la visualizzazione
+plotRGB(str_giu_19, r=3, g=2, b=1, stretch="lin", main="Giugno 2019 (Pre)")          # Imposto uno stretch lineare per aumentare uniformemente il contrasto tra a i pixel
 plotRGB(str_ago_19, r=3, g=2, b=1, stretch="lin", main="Agosto 2019 (Post)")
 plotRGB(str_giu_20, r=3, g=2, b=1, stretch="lin", main="Giugno 2020 (Recupero)")
-dev.off()                                     # Chiudere il pannello di visualizzazione e ristabilire il formato di default 
+dev.off()                                                                            # Chiudere il pannello di visualizzazione e ristabilire il formato di default 
 ```
 
 <img width="1000" alt="true_color_confronto" src="https://github.com/user-attachments/assets/ce475319-2ea7-4d73-a7d6-66bd93cf9b7b" />
@@ -235,7 +236,7 @@ segnale atteso dell'impatto degli incendi.
 
 ### 5.5 Confronto diretto delle bande RGB + NIR
 
-Per osservare con maggior dettaglio gli effetti immediati dell'eruzione, andiamo a plottare un confronto banda a banda fra giugno e agosto 2019,
+Per osservare con maggior dettaglio gli effetti immediati dell'eruzione, andiamo a plottare un confronto banda a banda, selezionate con le `[[]]`, fra giugno e agosto 2019,
 in una palette `inferno()` del pacchetto `viridis`
 
 ```r
@@ -269,7 +270,7 @@ $` DVI = NIR - RED `$
 
 Non essendo normalizzato, il DVI va letto soprattutto in termini relativi tra le tre date piuttosto che in valore assoluto.
 
-Con una semplice differenza tra bande, che selezioniamo con le `[]`, si calcola il primo indice spettrale:
+Con una semplice differenza tra bande, `-`, che selezioniamo con le `[]`, si calcola il primo indice spettrale:
 ```r
 # Calcolo degli indici che salvo come oggetti 
 dvi_giu_19 <- str_giu_19[["B8"]] - str_giu_19[["B4"]]
