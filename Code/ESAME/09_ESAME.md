@@ -451,9 +451,9 @@ dev.off()
 Per ottenere una stima quantitativa dell'impatto sulla copertura del suolo, è stata costruita, per ciascuna data, una classificazione in tre classi (mare, suolo nudo/
 cenere, vegetazione) basata su semplici soglie applicate a NDWI e NDVI.
 
-Il primo passo è stato calcolare l'NDWI su tutte e tre le date:
+Il primo passo è stato calcolare l'NDWI di McFeeters (1996) su tutte e tre le date:
 
-$` NDWI = \frac{NIR - SWIR1}{NIR + SWIR1} `$
+$` NDWI = \frac{GREEN - NIR }{GREEN + NIR} `$
 
 Come indicato in precedenza, il suo utilizzo qui non è finalizzato a una vera e propria caratterizzazione
 idrologica, ma esclusivamente a isolare i pixel di mare (valori di NDWI positivi) e poterli quindi trattare come a sè stanti nella classificazione:
